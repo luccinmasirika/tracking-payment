@@ -1,0 +1,180 @@
+<!-- start select 1-->
+<div class="card">
+  <div class="card-body">
+    <form>
+      <div class="row">
+        <div class="col-lg-12">
+          <!--Nanem -->
+          <div class="mb-3">
+            <label class="form-label"
+              >Selectionnez votre nom sur la liste</label
+            >
+            <select class="form-control select2" name="name">
+              <option>Cliquer pour selectionner</option>
+              <option value="AK">Luccin Masirika</option>
+              <option value="HI">Nicolas Tesla</option>
+              <option value="HI">Isaac Newton</option>
+              <option value="HI">Albert Einstein</option>
+            </select>
+          </div>
+          <!-- Fonds -->
+          <div class="mb-3">
+            <label class="form-label"
+              >Selectionnez les fonds que vous avez réceptionnés et pour lequel
+              vous soumettez</label
+            >
+            <select class="form-control select2" name="fond">
+              <option>Cliquer pour selectionner</option>
+              <option value="AK">Salaire (Phase 1)</option>
+              <option value="AK">Salaire (Phase 2)</option>
+              <option value="AK">Perdiem (Phase 2)</option>
+              <option value="AK">Perdiem (Phase 3)</option>
+              <option value="HI">
+                Frais internet et communication (Phase 3)
+              </option>
+            </select>
+          </div>
+          <!-- Payement-->
+          <div class="mb-3">
+            <label class="form-label"
+              >Avez-vous reçu le paiement sélectionné OUI ou NON ?</label
+            >
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="payment"
+                value="Oui"
+                onclick="onYesClick()"
+                id="check"
+                checked
+              />
+              <label class="form-check-label" for="formRadios1"> Oui </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="Non"
+                onclick="onNoClick()"
+                name="payment"
+                id="check2"
+              />
+              <label class="form-check-label" for="formRadios2"> Non </label>
+            </div>
+          </div>
+          <!-- Bank-->
+          <div class="mb-3">
+            <label class="form-label" for="default-input"
+              >Dites-nous votre banque svp !</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="default-input"
+              name="bank"
+              placeholder="Votre bank"
+            />
+          </div>
+          <!-- Montant-->
+          <div class="mb-3" id="montant">
+            <label class="form-label"
+              >Montant reçu pour l'option sélectionnée</label
+            >
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">$</div>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                name="montant"
+                id="inlineFormInputGroup"
+                placeholder="Montant"
+              />
+            </div>
+          </div>
+          <!-- Date-->
+          <div class="mb-3" id="date">
+            <label class="form-label">Date de reception</label>
+            <div class="input-group" id="datepicker2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="dd M, yyyy"
+                data-date-format="dd M, yyyy"
+                data-date-container="#datepicker2"
+                data-provide="datepicker"
+                data-date-autoclose="true"
+              />
+
+              <span class="input-group-text"
+                ><i class="mdi mdi-calendar"></i
+              ></span>
+            </div>
+            <!-- input-group -->
+          </div>
+          <!-- Commentaire-->
+          <div class="mb-3">
+            <label class="form-label" for="default-input"
+              >Des commentaires ?</label
+            >
+            <textarea
+              class="form-control"
+              rows="3"
+              name="comment"
+              placeholder="Votre commentaire"
+            ></textarea>
+          </div>
+          <!-- Submit-->
+          <div class="mb-3">
+            <button
+              type="button"
+              class="btn btn-primary waves-effect waves-light"
+            >
+              Envoyez <i class="uil uil-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- end select 1 -->
+
+<!-- JAVASCRIPT -->
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="/assets/libs/node-waves/waves.min.js"></script>
+<script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+<script>
+  const check = document.querySelector('#check').checked;
+  const date = document.querySelector('#date').style;
+  const montant = document.querySelector('#montant').style;
+  const onYesClick = () => {
+    date.display = 'block';
+    montant.display = 'block';
+  };
+  const onNoClick = () => {
+    date.display = 'none';
+    montant.display = 'none';
+  };
+  console.log(date);
+</script>
+
+<!-- plugins -->
+<script src="/assets/libs/select2/js/select2.min.js"></script>
+<script src="/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+<script src="/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="/assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+
+<!-- init js -->
+<script src="/assets/js/pages/form-advanced.init.js"></script>
+
+<script src="/assets/js/app.js"></script>

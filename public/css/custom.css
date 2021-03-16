@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.my-container {
+  width: 60%;
+  height: 100vh;
+  background: #414141 url('../images/upload/terre.jpg');
+  background-position: center;
+  block-size: cover;
+  text-align: center;
+}
+
+.my-container-phone {
+  width: 100%;
+  height: 300px;
+}
+
+.my-container2 {
+  width: 40%;
+  height: 100vh;
+  padding: 15px;
+  overflow: auto;
+}
+
+.my-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 60px 40px;
+  width: 100%;
+  height: 100%;
+}
+
+.text1 {
+  font-family: 'Montserrat';
+  color: #fff;
+  margin: 50px 0;
+  font-weight: 700;
+  text-shadow: 5px 5px 30px #000;
+}
+
+/* .text2 {
+  font-size: 190%;
+} */
+
+.text {
+  color: #fff;
+  font-family: 'Montserrat';
+  margin: 0 10px;
+}
+
+.text a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline !important;
+}
+
+.logo {
+  width: 70%;
+  height: auto;
+}
+
+.authentication-bg {
+  background-color: rgba(187, 199, 221, 0.25);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .text2 {
+    font-size: 190%;
+  }
+  .my-container2 {
+    width: 100%;
+    height: auto;
+    overflow: unset;
+  }
+  body {
+    overflow-y: unset;
+  }
+}
