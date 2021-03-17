@@ -65,7 +65,7 @@
                             <div class="mb-3 row">
                               <label for="example-text-input" class="col-md-2 col-form-label">Role</label>
                               <div class="col-md-10">
-                                <select class="form-control select2" name="role">
+                                <select class="form-control select2-search-disable" name="role">
                                   <option>Selectionnez le role</option>
                                   <option value="ADMIN">Admin</option>
                                   <option value="USER">User</option>
@@ -116,12 +116,8 @@
                                               <td>email@gmail.com</td>
                                               <td>Admin</td>
                                               <td class="action">
-                                                <a href="#">
-                                                  <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="#">
-                                                  <i class="fa fa-trash-alt"></i>
-                                                </a>
+                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
+                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                               </td>
                                           </tr>
                                           <% }) %>
@@ -161,4 +157,15 @@
       <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
       <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
 
-       <script src="/assets/js/app.js"></script>
+       <!-- plugins -->
+      <script src="/assets/libs/select2/js/select2.min.js"></script>
+      <script src="/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+      <script src="/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+      <script src="/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+      <script src="/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+      <script src="/assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+
+      <!-- init js -->
+      <script src="/assets/js/pages/form-advanced.init.js"></script>
+
+      <script src="/assets/js/app.js"></script>
