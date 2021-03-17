@@ -5,16 +5,19 @@
         <div class="card-body p-4">
           <div class="text-center mt-2">
             <h5 class="text-primary">Welcome Back !</h5>
-            <p class="text-muted">Sign in to continue to Minible.</p>
+            <p class="text-muted">
+              Sign in to continue to PaymentTracker-GRID3-Mappers.
+            </p>
           </div>
           <div class="p-2 mt-4">
             <form action="/admin">
               <div class="mb-3">
-                <label class="form-label" for="username">Username</label>
+                <label class="form-label" for="username">Email</label>
                 <input
-                  type="text"
+                  type="email"
                   class="form-control"
                   id="username"
+                  value="admin.tracker@gmail.com"
                   placeholder="Enter username"
                 />
               </div>
@@ -25,6 +28,7 @@
                   type="password"
                   class="form-control"
                   id="userpassword"
+                  value="adminpassword"
                   placeholder="Enter password"
                 />
               </div>
@@ -33,6 +37,7 @@
                 <button
                   class="btn btn-primary w-sm waves-effect waves-light"
                   type="submit"
+                  onclick="window.location.href='/admin'"
                 >
                   Log In
                 </button>
@@ -48,8 +53,11 @@
           <script>
             document.write(new Date().getFullYear());
           </script>
-          Tracker App. Designed with <i class="mdi mdi-heart text-danger"></i
-          ><a href="" target="_blank" rel="noopener noreferrer"
+          Tracker WebApp. Designed with <i class="mdi mdi-heart text-danger"></i
+          ><a
+            href="https://uptodatedevelopers.com"
+            target="_blank"
+            rel="noopener noreferrer"
             >Uptodate Developers</a
           >
         </p>

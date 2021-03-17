@@ -1,0 +1,90 @@
+<!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+              <div class="page-content">
+                  <div class="container-fluid">
+
+                      <!-- start page title -->
+                      <div class="row">
+                          <div class="col-12">
+                              <div class="page-title-box d-flex align-items-center justify-content-between">
+                                  <h4 class="mb-0">Autres Paiements</h4>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end page title -->
+
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-body">
+                              <h4 class="card-title">Autres paiements</h4>
+                              <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
+
+                              <div class="table-responsive">
+                                  <table class="table table-striped mb-0">
+                                      <thead>
+                                          <tr>
+                                              <th>#</th>
+                                              <th>Type de paiement</th>
+                                              <th>Montant</th>
+                                              <th>Réfference</th>
+                                              <th>Bénéficiaire</th>
+                                              <th>Date de paiement</th>
+                                              <th>Action</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <% Array(7).fill(null).forEach((element, index) => { %>
+                                            <tr>
+                                              <th scope="row"><%=index + 1%></th>
+                                              <td>Salaire (Phase 1)</td>
+                                              <td>350$</td>
+                                              <td>Lorem ipsum </td>
+                                              <td>Lorem ipsum </td>
+                                              <td>15 Avril 2017 </td>
+                                              <td class="action">
+                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
+                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                              </td>
+                                              </tr>
+                                          <% }) %>
+                                      </tbody>
+                                  </table>
+                              </div>
+
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+
+                    </div>
+                    <!-- end row -->
+
+
+                  </div> <!-- container-fluid -->
+              </div>
+              <!-- End Page-content -->
+
+
+
+             <!-- Footer-->
+             <%- include('./footer.ejs') %>
+          </div>
+          <!-- end main content-->
+
+      </div>
+      <!-- END layout-wrapper -->
+
+      <!-- JAVASCRIPT -->
+      <script src="/assets/libs/jquery/jquery.min.js"></script>
+      <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+      <script src="/assets/libs/simplebar/simplebar.min.js"></script>
+      <script src="/assets/libs/node-waves/waves.min.js"></script>
+      <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+      <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+       <script src="/assets/js/app.js"></script>

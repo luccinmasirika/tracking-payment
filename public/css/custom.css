@@ -9,7 +9,7 @@ body {
 }
 
 .my-container {
-  width: 60%;
+  width: 50%;
   height: 100vh;
   background: #414141 url('../images/upload/terre.jpg');
   background-position: center;
@@ -23,7 +23,7 @@ body {
 }
 
 .my-container2 {
-  width: 40%;
+  width: 50%;
   height: 100vh;
   padding: 15px;
   overflow: auto;
@@ -72,6 +72,48 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.action {
+  display: flex;
+  justify-content: space-around;
+}
+
+.action a {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.action a:hover {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.action i {
+  font-size: 20px;
+  margin: 0 -14px;
+}
+
+.action a:nth-child(2) i {
+  color: rgb(255, 52, 66);
+}
+
+.action a:nth-child(2) i:hover {
+  color: rgb(255, 0, 17);
+}
+
+.updev {
+  position: absolute;
+  bottom: 15px;
+  left: calc(50% - 125px);
 }
 
 @media screen and (max-width: 767px) {
