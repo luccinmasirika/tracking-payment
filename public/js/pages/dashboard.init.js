@@ -94,17 +94,17 @@ options = {
   colors: ['#5b73e8', '#dfe2e6', '#f1b44c'],
   series: [
     {
-      name: 'Desktops',
+      name: 'Payé',
       type: 'column',
       data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
     },
     {
-      name: 'Laptops',
+      name: 'Pas payé',
       type: 'area',
       data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
     },
     {
-      name: 'Tablets',
+      name: 'Instructions',
       type: 'line',
       data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
     },
@@ -135,13 +135,13 @@ options = {
   ],
   markers: { size: 0 },
   xaxis: { type: 'datetime' },
-  yaxis: { title: { text: 'Points' } },
+  yaxis: { title: { text: 'cas' } },
   tooltip: {
     shared: !0,
     intersect: !1,
     y: {
       formatter: function (e) {
-        return void 0 !== e ? e.toFixed(0) + ' points' : e;
+        return void 0 !== e ? e.toFixed(0) + ' cas' : e;
       },
     },
   },

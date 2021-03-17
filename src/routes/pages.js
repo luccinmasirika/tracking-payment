@@ -15,6 +15,8 @@ const {
   addUser,
   addFonctionnaire,
   listAutres,
+  paiementSalaires,
+  paiementPerdiems
 } = require('../controllors/pages');
 
 route.get('/', form);
@@ -27,6 +29,8 @@ route.get('/admin/cartographes', listCartographe);
 route.get('/admin/add-instruction', addInstructions);
 route.get('/admin/instructions', listInstructions);
 route.get('/admin/paiements', paiements);
+route.get('/admin/paiement-salaires', paiementSalaires);
+route.get('/admin/paiement-perdiems', paiementPerdiems);
 route.get('/admin/add-autres-paiements', autres);
 route.get('/admin/autres-paiements', listAutres);
 route.get('/admin/rapports', rapports);

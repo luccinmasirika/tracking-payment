@@ -10,7 +10,7 @@
                       <div class="row">
                           <div class="col-12">
                               <div class="page-title-box d-flex align-items-center justify-content-between">
-                                  <h4 class="mb-0">Liste de lettres d'instruction</h4>
+                                  <h4 class="mb-0">Paiement des perdiems</h4>
 
                               </div>
                           </div>
@@ -24,65 +24,63 @@
                             <div class="table-responsive mb-4">
                                 <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
+                                        <tr class="bg-transparent">
                                             <th>#</th>
-                                            <th>Date</th>
+                                            <th>Name</th>
+                                            <th>Bank</th>
                                             <th>Montant</th>
                                             <th>Etat</th>
-                                            <th>Agent</th>
-                                            <th>Libélé</th>
-                                            <th>Description</th>
+                                            <th>Date</th>
+                                            <th>Commentaire</th>
                                             <th style="width: 120px;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <td><a href="javascript: void(0);" class="text-dark fw-bold">LI01</a> </td>
+                                        <td><a href="javascript: void(0);" class="text-dark fw-bold">1</a> </td>
+                                        <td>Albert Ein...</td>
                                         <td>
-                                            26 Mars, 2020
+                                            -
                                         </td>
                                         <td>
-                                          $141
+                                          -
                                         </td>
                                         <td>
                                           <div class="badge bg-soft-danger font-size-12">
                                             Pas payé
                                           </div>
                                         </td>
-                                        <td>Albert Ein...</td>
-                                        <td>Test</td>
-                                        <td style="width:200px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Lorem ipsum dolor sit...</td>
-
+                                        <td>-</td>
+                                        <td>Lorem ipsum dolor sit...</td>
 
                                         <td>
-                                            <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                            <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                            <button type="button" data-bs-toggle="modal" data-bs-target=".instructionNoPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target=".perdiemsModal" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                         </td>
                                     </tr>
                                        <% Array(24).fill(null).forEach((el, index) => { %>
                                         <tr>
-                                          <td><a href="javascript: void(0);" class="text-dark fw-bold">LI0<%=index + 1 %> </a> </td>
+                                          <td><a href="javascript: void(0);" class="text-dark fw-bold"><%=index + 2%></a> </td>
+                                          <td>Luccin Mas...</td>
                                           <td>
-                                              10 Jul, 2020
+                                              Ecobank
                                           </td>
                                           <td>
                                             $141
                                           </td>
-
                                           <td>
-                                            <div class="badge bg-soft-success font-size-12">Payé </div>
+                                            <div class="badge bg-soft-success font-size-12">
+                                              Payé
+                                            </div>
                                           </td>
-                                          <td>Luccin Mas...</td>
-                                          <td>Exemplaire</td>
+                                          <td>13 Mai, 2021</td>
                                           <td style="width:200px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Lorem ipsum dolor sit...</td>
 
                                           <td>
-                                              <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              <button type="button" data-bs-toggle="modal" data-bs-target=".instructionPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target=".perdiemsModal" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
                                       </tr>
                                        <% }) %>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -91,8 +89,7 @@
 
                       <!-- End Instruction list-->
 
-                      <%- include('./instructionNopaid.ejs') %>
-                      <%- include('./instructionPaid.ejs') %>
+                      <%- include('./paiementPerdiemsDetail.ejs') %>
 
                   </div>
                   <!-- end row -->

@@ -76,6 +76,23 @@ exports.paiements = (req, res) => {
   res.render('pages/admin', { path });
 };
 
+
+/**
+ * PAIEMENT PERDIEMS SCREEN
+ */
+ exports.paiementPerdiems = (req, res) => {
+  const path = 'paiementPerdiems';
+  res.render('pages/admin', { path });
+};
+
+/**
+ * PAIEMENT SALAIRES SCREEN
+ */
+ exports.paiementSalaires = (req, res) => {
+  const path = 'paiementSalaires';
+  res.render('pages/admin', { path });
+};
+
 /**
  * ADD AUTRES PAIEMENT SCREEN
  */
