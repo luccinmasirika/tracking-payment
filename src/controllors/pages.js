@@ -37,6 +37,14 @@ exports.addCartographe = (req, res) => {
 };
 
 /**
+ * ADD FONCTION SCREEN
+ */
+exports.addFonction = (req, res) => {
+  const path = 'addFonction';
+  res.render('pages/admin', { path });
+};
+
+/**
  * ADD FONCTIONNAIRE SCREEN
  */
 exports.addFonctionnaire = (req, res) => {
@@ -76,11 +84,10 @@ exports.paiements = (req, res) => {
   res.render('pages/admin', { path });
 };
 
-
 /**
  * PAIEMENT PERDIEMS SCREEN
  */
- exports.paiementPerdiems = (req, res) => {
+exports.paiementPerdiems = (req, res) => {
   const path = 'paiementPerdiems';
   res.render('pages/admin', { path });
 };
@@ -88,25 +95,53 @@ exports.paiements = (req, res) => {
 /**
  * PAIEMENT SALAIRES SCREEN
  */
- exports.paiementSalaires = (req, res) => {
+exports.paiementSalaires = (req, res) => {
   const path = 'paiementSalaires';
-  res.render('pages/admin', { path });
-};
-
-/**
- * ADD AUTRES PAIEMENT SCREEN
- */
- exports.listAutres = (req, res) => {
-  const path = 'listPaiementAutres';
   res.render('pages/admin', { path });
 };
 
 /**
  * LIST AUTRES PAIEMENT SCREEN
  */
+exports.listAutres = (req, res) => {
+  const path = 'listPaiementAutres';
+  res.render('pages/admin', { path });
+};
+
+/**
+ * ADD AUTRES PAIEMENT SCREEN
+ */
 exports.autres = (req, res) => {
   const path = 'paiementAutres';
-  res.render('pages/admin', { path });
+  const provinces = [
+    'Bas-Uele',
+    'Équateur',
+    'Haut-Katanga',
+    'Haut-Lomami',
+    'Haut-Uele',
+    'Ituri',
+    'Kasaï',
+    'Kasaï central',
+    'Kasaï oriental',
+    'Kinshasa',
+    'Kongo-central',
+    'Kwango',
+    'Kwilu',
+    'Lomami',
+    'Lualaba',
+    'Mai-Ndombe',
+    'Maniema',
+    'Mongala',
+    'Nord-Kivu',
+    'Nord-Ubangi',
+    'Sankuru',
+    'Sud-Kivu',
+    'Sud-Ubangi',
+    'Tanganyika',
+    'Tshopo',
+    'Tshuapa',
+  ];
+  res.render('pages/admin', { path, provinces });
 };
 
 /**

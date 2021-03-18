@@ -75,6 +75,19 @@
                                             />
                                           </div>
 
+                                          <!-- Libele -->
+                                          <div class="mb-3">
+                                            <label class="form-label" for="default-input"
+                                              >Libellé de paiement</label>
+                                            <input
+                                              class="form-control"
+                                              type="text"
+                                              id="default-input"
+                                              name="libele"
+                                              placeholder="Libellé"
+                                            />
+                                          </div>
+
                                           <!--List Agent -->
                                           <div class="mb-3">
                                             <label class="form-label"
@@ -86,6 +99,19 @@
                                               <option value="HI">Nicolas Tesla</option>
                                               <option value="HI">Isaac Newton</option>
                                               <option value="HI">Albert Einstein</option>
+                                            </select>
+                                          </div>
+
+                                          <!-- Province -->
+                                          <div class="mb-3">
+                                            <label class="form-label"
+                                              >Selectionnez la province</label
+                                            >
+                                            <select class="form-control select2" name="fond">
+                                              <option>Cliquer pour selectionner</option>
+                                              <% provinces.forEach(element => { %>
+                                                <option value="<%=element%>"><%=element%></option>
+                                              <% }) %>
                                             </select>
                                           </div>
 
@@ -108,6 +134,19 @@
                                               ></span>
                                             </div>
                                             <!-- input-group -->
+                                          </div>
+
+                                          <!-- Description -->
+                                          <div class="mb-3">
+                                            <label class="form-label" for="default-input"
+                                              >Description</label
+                                            >
+                                            <textarea
+                                              class="form-control"
+                                              rows="3"
+                                              name="comment"
+                                              placeholder="Description"
+                                            ></textarea>
                                           </div>
 
 
