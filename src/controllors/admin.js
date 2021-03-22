@@ -99,12 +99,12 @@ exports.createPaiement = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/paiements');
       }
-      req.flash('Success', `Instruction letter added`);
-      res.redirect('/admin/instructions');
+      req.flash('Success', `Payment added`);
+      res.redirect('/admin/paiements');
     });
   } catch (err) {
     req.flash('Error', `${err}`);
-    res.redirect('/admin/add-instructions');
+    res.redirect('/admin/paiements');
   }
 };
 
@@ -116,9 +116,10 @@ exports.createPaiementAutre = async (req, res) => {
         if (data.error) {
           req.flash('Error', `${data.error}`);
           res.redirect('/admin/add-autres-paiements');
+        } else {
+          req.flash('Success', `Payment added`);
+          res.redirect('/admin/autres-paiements');
         }
-        req.flash('Success', `Instruction letter added`);
-        res.redirect('/admin/instructions');
       }
     );
   } catch (err) {

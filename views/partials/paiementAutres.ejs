@@ -38,7 +38,7 @@
 
                                     <h4 class="card-title">Ajoutez Lorem, ipsum dolor.</h4>
                                     <div class="mb-3 row"></div>
-                                    <form>
+                                    <form action="/create/paiement-autre/60578cae99564a53e3bf0dc0" method="post">
                                       <div class="row">
                                         <div class="col-lg-12">
 
@@ -47,15 +47,11 @@
                                             <label class="form-label"
                                               >Selectionnez de paiement</label
                                             >
-                                            <select class="form-control select2" name="fond">
+                                            <select class="form-control select2" name="payment">
                                               <option>Cliquer pour selectionner</option>
-                                              <option value="AK">Salaire (Phase 1)</option>
-                                              <option value="AK">Salaire (Phase 2)</option>
-                                              <option value="AK">Perdiem (Phase 2)</option>
-                                              <option value="AK">Perdiem (Phase 3)</option>
-                                              <option value="HI">
-                                                Frais internet et communication (Phase 3)
-                                              </option>
+                                              <% data.forEach(el => { %>
+                                                <option value="<%=el.payment%>"><%=el.payment%></option>
+                                              <% }) %>
                                             </select>
                                           </div>
 
@@ -99,7 +95,7 @@
                                               class="form-control"
                                               type="text"
                                               id="default-input"
-                                              name="libele"
+                                              name="libelle"
                                               placeholder="Libellé"
                                             />
                                           </div>
@@ -109,12 +105,11 @@
                                             <label class="form-label"
                                               >Bénéficiaire</label
                                             >
-                                            <select class="form-control select2" name="name">
+                                            <select class="form-control select2" name="agent">
                                               <option>Cliquer pour selectionner un agent</option>
-                                              <option value="AK">Luccin Masirika</option>
-                                              <option value="HI">Nicolas Tesla</option>
-                                              <option value="HI">Isaac Newton</option>
-                                              <option value="HI">Albert Einstein</option>
+                                              <% data2.forEach(el => { %>
+                                                <option value="<%=el.firstName%> <%=el.lastName%>"><%=el.firstName%> <%=el.lastName%></option>
+                                              <% }) %>
                                             </select>
                                           </div>
 
@@ -123,7 +118,7 @@
                                             <label class="form-label"
                                               >Selectionnez la province</label
                                             >
-                                            <select class="form-control select2" name="fond">
+                                            <select class="form-control select2" name="province">
                                               <option>Cliquer pour selectionner</option>
                                               <% provinces.forEach(element => { %>
                                                 <option value="<%=element%>"><%=element%></option>
@@ -142,6 +137,7 @@
                                                 data-date-format="dd M, yyyy"
                                                 data-date-container="#datepicker2"
                                                 data-provide="datepicker"
+                                                name="date"
                                                 data-date-autoclose="true"
                                               />
 
@@ -160,7 +156,7 @@
                                             <textarea
                                               class="form-control"
                                               rows="3"
-                                              name="comment"
+                                              name="description"
                                               placeholder="Description"
                                             ></textarea>
                                           </div>
@@ -169,7 +165,7 @@
                                           <!-- Submit-->
                                           <div class="mb-3">
                                             <button
-                                              type="button"
+                                              type="submit"
                                               class="btn btn-primary waves-effect waves-light"
                                             >
                                               Submit <i class="uil uil-arrow-right ms-2"></i>
@@ -184,7 +180,6 @@
                         </div> <!-- end col -->
                     </div>
                     <!-- end row -->
-
                   </div> <!-- container-fluid -->
               </div>
               <!-- End Page-content -->

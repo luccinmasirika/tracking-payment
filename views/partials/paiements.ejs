@@ -40,13 +40,13 @@
                                     <h4 class="card-title">Ajouter un type de paiement</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
-                                    <form>
+                                    <form action="/create/paiement/60578cae99564a53e3bf0dc0" method="post">
 
                                   <!-- Paiements -->
                                     <div class="mb-3 row">
                                       <label for="example-text-input" class="col-md-2 col-form-label">Paiements</label>
                                       <div class="col-md-10">
-                                          <input class="form-control" name="lastName" type="text" placeholder="Salaire (Phase 2)" id="example-text-input">
+                                          <input class="form-control" name="payment" type="text" placeholder="Salaire (Phase 2)" id="example-text-input">
                                       </div>
                                   </div>
 
@@ -54,7 +54,7 @@
                                   <div class="mb-3 row">
                                     <label for="example-text-input" class="col-md-2 col-form-label">Description</label>
                                     <div class="col-md-10">
-                                        <input class="form-control" name="lastName" type="text" placeholder="Frais de deplacement" id="example-text-input">
+                                        <input class="form-control" name="description" type="text" placeholder="Frais de deplacement" id="example-text-input">
                                     </div>
                                 </div>
 
@@ -62,7 +62,7 @@
                                 <div class="mb-3 row">
                                   <label for="example-text-input" class="col-md-2 col-form-label">Montant</label>
                                   <div class="col-md-10">
-                                      <input class="form-control" name="lastName" type="number" placeholder="450 000$" id="example-text-input">
+                                      <input class="form-control" name="montant" type="number" placeholder="450 000$" id="example-text-input">
                                   </div>
                               </div>
 
@@ -73,8 +73,8 @@
                                   <button type="submit" class="btn btn-primary w-md">Submit <i class="uil uil-arrow-right ms-2"></i></button>
                                 </div>
                             </div>
-                            </div>
                           </form>
+                            </div>
                                 </div>
                             </div>
                         </div> <!-- end col -->
@@ -99,66 +99,18 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <tr>
-                                              <th scope="row">1</th>
-                                              <td>Salaire (Phase 1)</td>
-                                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, error.</td>
-                                              <td>350$</td>
+                                          <% data.forEach((el, index) => { %>
+                                            <tr>
+                                              <th scope="row"><%=index + 1%></th>
+                                              <td><%=el.payment%></td>
+                                              <td><%=el.description%></td>
+                                              <td><%=el.montant%>$</td>
                                               <td class="action">
                                                 <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
                                               <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                               </td>
                                           </tr>
-                                          <tr>
-                                              <th scope="row">2</th>
-                                              <td>Salaire (Phase 2)</td>
-                                              <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, officia!</td>
-                                              <td>501$</td>
-                                              <td class="action">
-                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row">3</th>
-                                              <td>Perdiem (Phase 2)</td>
-                                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, iusto?</td>
-                                              <td>260$</td>
-                                              <td class="action">
-                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3</th>
-                                            <td>Perdiem (Phase 3)</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                            <td>330$</td>
-                                            <td class="action">
-                                              <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">3</th>
-                                          <td>Frais Internet et communication (Phase 2)</td>
-                                          <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, doloremque.</td>
-                                          <td>32$</td>
-                                          <td class="action">
-                                            <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">3</th>
-                                        <td>Frais Internet et communication (Phase 3)</td>
-                                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum, facilis?</td>
-                                        <td>40$</td>
-                                        <td class="action">
-                                          <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                        </td>
-                                    </tr>
+                                          <% }) %>
                                   </tbody>
                                 </table>
                               </div>

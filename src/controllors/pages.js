@@ -137,8 +137,18 @@ exports.listInstructions = (req, res) => {
  * PAIEMENT SCREEN
  */
 exports.paiements = (req, res) => {
-  const path = 'paiements';
-  res.render('pages/admin', { path });
+  try {
+    read(`paiements/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      const path = 'paiements';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/paiements');
+  }
 };
 
 /**
@@ -203,36 +213,51 @@ exports.listAutres = (req, res) => {
  * ADD AUTRES PAIEMENT SCREEN
  */
 exports.autres = (req, res) => {
-  const path = 'paiementAutres';
-  const provinces = [
-    'Bas-Uele',
-    'Équateur',
-    'Haut-Katanga',
-    'Haut-Lomami',
-    'Haut-Uele',
-    'Ituri',
-    'Kasaï',
-    'Kasaï central',
-    'Kasaï oriental',
-    'Kinshasa',
-    'Kongo-central',
-    'Kwango',
-    'Kwilu',
-    'Lomami',
-    'Lualaba',
-    'Mai-Ndombe',
-    'Maniema',
-    'Mongala',
-    'Nord-Kivu',
-    'Nord-Ubangi',
-    'Sankuru',
-    'Sud-Kivu',
-    'Sud-Ubangi',
-    'Tanganyika',
-    'Tshopo',
-    'Tshuapa',
-  ];
-  res.render('pages/admin', { path, provinces });
+  try {
+    read(`paiements/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      read(`fonctionnaires/60578cae99564a53e3bf0dc0`).then((data2) => {
+        if (data2.error) {
+          req.flash('Error', `${data2.error}`);
+        }
+        const path = 'paiementAutres';
+        const provinces = [
+          'Bas-Uele',
+          'Équateur',
+          'Haut-Katanga',
+          'Haut-Lomami',
+          'Haut-Uele',
+          'Ituri',
+          'Kasaï',
+          'Kasaï central',
+          'Kasaï oriental',
+          'Kinshasa',
+          'Kongo-central',
+          'Kwango',
+          'Kwilu',
+          'Lomami',
+          'Lualaba',
+          'Mai-Ndombe',
+          'Maniema',
+          'Mongala',
+          'Nord-Kivu',
+          'Nord-Ubangi',
+          'Sankuru',
+          'Sud-Kivu',
+          'Sud-Ubangi',
+          'Tanganyika',
+          'Tshopo',
+          'Tshuapa',
+        ];
+        res.render('pages/admin', { path, provinces, data, data2 });
+      });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/paiements');
+  }
 };
 
 /**

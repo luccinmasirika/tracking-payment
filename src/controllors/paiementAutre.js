@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
   const data = new PaiementAutre(req.body);
   data.save((error, paiementAutre) => {
     if (error) {
-      return res.status(400).json({ error: 'Something went wrong' });
+      return res.status(400).json({ error: 'Something went wrong' + error });
     }
     res.json(paiementAutre);
   });

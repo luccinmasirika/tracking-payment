@@ -11,11 +11,11 @@ const {
   getByID,
 } = require('../controllors/paiement');
 
-router.post('/paiement/create/:userId', requireSignin, isAuth, create);
-router.get('/paiement/:userId/:id', requireSignin, isAuth, read);
-router.get('/paiements/:userId', requireSignin, isAuth, isAdmin, readAll);
-router.put('/paiement/:userId/:id', requireSignin, isAuth, update);
-router.delete('/paiement/:userId/:id', requireSignin, isAuth, remove);
+router.post('/paiement/create/:userId', create);
+router.get('/paiement/:userId/:id',read);
+router.get('/paiements/:userId',  readAll);
+router.put('/paiement/:userId/:id', update);
+router.delete('/paiement/:userId/:id', remove);
 
 router.param('id', getByID);
 router.param('userId', getUserByID);
