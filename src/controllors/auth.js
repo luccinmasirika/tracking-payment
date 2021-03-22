@@ -1,79 +1,62 @@
-const User = require('../models/user')
-const jwt = require('jsonwebtoken')
-// Token generator
-const expressJwt = require('express-jwt')
-// Authorizations
-const { errorHandler } = require('../helpers/dbErrorHandler')
+const jwt = require('jsonwebtoken'); // generate signed token
+const User = require('../models/User');
+const { config } = require('../config/config');
 
-// ******* SIGNUP *********
-exports.signup = (req, res) => {
-  const user = new User(req.body)
-  user.save((error, user) => {
-    if (error) {
-      return res.status(400).json({ error: errorHandler(error) })
-    }
-    user.salt = undefined
-    user.hashed_password = undefined
-    res.json({ user })
-  })
-}
+// User Register
+exports.signup = async (req, res) => {
+  const findUser = await User.findOne({ email: req.body.email });
+  if (findUser) {
+    return res.status(400).json({ error: '"email" is already taken' });
+  }
 
+  const user = new User(req.body);
+  user.save((err, user) => {
+    if (err) return res.status(400).json({ error: err });
+    user.hashed_password = undefined;
+    user.salt = undefined;
+    return res.json({ user });
+  });
+};
 
-
-// ******* SIGNIN *********
-exports.signin = (req, res) => {
-  const { email, password } = req.body
-  // Find user in Database
-  User.findOne({ email }, (error, user) => {
-    // If error or no user found
-    if (error || !user) {
-      res.status(400).json({
-        error: 'The user with this email does not exist. Please Signup.',
-      })
+// User Login
+exports.signin = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email }, (err, user) => {
+    if (err || !user) {
+      return res.status(400).json({
+        error: 'We have not find a user with this email. Please signup',
+      });
     }
 
-    // if user found make sure that email and password are match
-    // create authentificate method in user model
+    // If user is founded make sure email and password match
     if (!user.authentificate(password)) {
-      return res.status(401).json({ error: 'Email and password do not match' })
+      return res.status(400).json({ error: 'Email and password dont match' });
     }
-    // Generate a signed token with user id and secret
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET)
+    
+    // Generate a signed token
+    const token = jwt.sign({ _id: user._id }, config.secret.signedTokenString);
 
-    // Persist token as 't' in cookes and exprire date
-    res.cookie('t', token, { expire: new Date() + 9999 })
+    // Persist token in cookie
 
-    // Return the response to fronten client
-    const { _id, name, email, role } = user
-    return res.json({ token, user: { _id, name, email, role } })
-  })
-}
+    res.cookie('jwt', token, {
+      expires: new Date(Date.now() + 900000),
+      httpOnly: true,
+    });
 
-// ******* SIGNOUT *********
+    // Send token and user
+    const { _id, name, email, role } = user;
+    return res.json({ token, user: { _id, name, email, role } });
+  });
+};
+
+// User Logout
 exports.signout = (req, res) => {
-  res.clearCookie('t')
-  res.json({ message: 'Signup success' })
-}
-
-// ******* FOR PROTECTED ROUTES *********
-exports.requireSignin = expressJwt({
-  secret: process.env.JWT_SECRET,
-  algorithms: ['HS256'],
-  userProperty: 'auth',
-})
-
-// ******* CHECK IF USER IS AUTH ********
-exports.isAuth = (req, res, next) => {
-  let user = req.profile && req.auth && req.profile._id == req.auth._id
-  if (!user) {
-    return res.status(403).json({ error: 'Access danied' })
+  try {
+    res.clearCookie('Login Token');
+    return res.json({ message: 'Logout success' });
+  } catch (error) {
+    return res.status(400).json({
+      errror: 'Something want wrong. Try again or contact assistance',
+    });
   }
-  next()
-}
-// ******* CHECK IF USER IS ADMIN *******
-exports.isAdmin = (req, res, next) => {
-  if (req.profile.role === 0) {
-    return res.status(403).json({ error: 'You are not admin. Access danied' })
-  }
-  next()
-}
+};

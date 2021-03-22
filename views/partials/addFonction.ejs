@@ -23,17 +23,33 @@
                             <div class="card">
                                 <div class="card-body">
 
+                                  <% if(locals.flash){%>
+                                    <div
+                                      class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
+                                      role="alert"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"
+                                      ></button>
+                                      <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+                                      <%=locals.flash.Error || locals.flash.Success%>
+                                    </div>
+                                    <%}%>
+
                                     <h4 class="card-title">Ajouter une nouvelle fonction</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
 
-                                  <form>
+                                  <form action="/create/fonction/60578cae99564a53e3bf0dc0" method="POST">
 
                                 <!-- Fonction -->
                                 <div class="mb-3 row">
                                   <label for="example-text-input" class="col-md-2 col-form-label">Fonction</label>
                                   <div class="col-md-10">
-                                      <input class="form-control" name="fonction" type="text" placeholder="Gestionnaire" id="example-text-input">
+                                      <input class="form-control" name="name" type="text" placeholder="Gestionnaire" id="example-text-input">
                                   </div>
                               </div>
 
@@ -69,10 +85,10 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <% Array(5).fill(null).forEach((element, index) => { %>
+                                          <% data.forEach((el, index) => { %>
                                             <tr>
                                               <th scope="row"><%=index+1%></th>
-                                              <td>Gestionnaire</td>
+                                              <td><%=el.name%></td>
                                               <td class="action">
                                                 <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
                                                 <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>

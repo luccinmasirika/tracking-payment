@@ -16,6 +16,17 @@ const flash = require('./src/middlewares/flash');
  */
 
 const formRouter = require('./src/routes/pages');
+const userRouter = require('./src/routes/user');
+const authRouter = require('./src/routes/auth');
+const instructionRouter = require('./src/routes/instruction');
+const fonctionRouter = require('./src/routes/fonction');
+const fonctionnaireRouter = require('./src/routes/fonctionnaire');
+const paiementRouter = require('./src/routes/paiement');
+const paiementAutreRouter = require('./src/routes/paiementAutre');
+const cartographeRouter = require('./src/routes/cartographe');
+
+// PAGES
+const adminRouter = require('./src/routes/admin');
 
 /**
  * START EXPRESS APPLICATION
@@ -75,6 +86,15 @@ app.use(flash);
  * APPLICATION ROUTES MIDLLEWARES
  */
 app.use(formRouter);
+app.use(userRouter);
+app.use(authRouter);
+app.use(adminRouter);
+app.use(cartographeRouter);
+app.use(fonctionRouter);
+app.use(fonctionnaireRouter);
+app.use(instructionRouter);
+app.use(paiementRouter);
+app.use(paiementAutreRouter);
 
 /**
  * SERVER LISTEN

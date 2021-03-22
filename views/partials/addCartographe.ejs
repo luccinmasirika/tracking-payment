@@ -23,80 +23,94 @@
 
                                     <h4 class="card-title">Ajoutez un cartographe</h4>
                                     <div class="mb-3 row"></div>
-                                    <form action="" method="post">
-
-                                    <!-- First Name -->
-                                    <div class="mb-3 row">
-                                        <label for="example-text-input" class="col-md-2 col-form-label">Nom</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" type="text" placeholder="Luccin" name="firstName" id="example-text-input">
+                                    <% if(locals.flash){%>
+                                        <div
+                                          class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
+                                          role="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+                                          <%=locals.flash.Error || locals.flash.Success%>
                                         </div>
-                                    </div>
+                                        <%}%>
+                                    <form action="/create/cartographe/60578cae99564a53e3bf0dc0" method="post">
 
-                                    <!-- Last Name -->
-                                    <div class="mb-3 row">
-                                      <label for="example-text-input" class="col-md-2 col-form-label">Postnom</label>
-                                      <div class="col-md-10">
-                                          <input class="form-control" name="lastName" type="text" placeholder="Masirika" id="example-text-input">
-                                      </div>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="mb-3 row">
-                                        <label for="example-text-input" class="col-md-2 col-form-label">Email</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" name="lastName" type="email" placeholder="Email" id="example-text-input">
-                                        </div>
-                                      </div>
-
-                                    <!-- Phone number -->
-
-                                    <!-- Airtel number -->
-                                    <div class="mb-3 row">
-                                        <label for="example-tel-input" class="col-md-2 col-form-label">Airtel</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" name="phone" type="tel" placeholder="+243825494121" id="example-tel-input">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 row">
-                                        <label for="example-tel-input" class="col-md-2 col-form-label"></label>
-                                        <div class="col-md-10">
-                                            <div class="form-check form-switch mb-3" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="customSwitchsizesm" checked>
-                                                <label class="form-check-label" for="customSwitchsizesm">Airtel Money</label>
+                                        <!-- First Name -->
+                                        <div class="mb-3 row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Nom</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" placeholder="Luccin" name="firstName" id="example-text-input">
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <!-- Vodacom number -->
-                                    <div class="mb-3 row">
-                                        <label for="example-tel-input" class="col-md-2 col-form-label">Vodacom</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" name="phone" type="tel" placeholder="+243825494121" id="example-tel-input">
-                                        </div>
-                                    </div>
 
-                                    <div class="mb-3 row">
-                                        <label for="example-tel-input" class="col-md-2 col-form-label"></label>
+                                        <!-- Last Name -->
+                                        <div class="mb-3 row">
+                                        <label for="example-text-input" class="col-md-2 col-form-label">Postnom</label>
                                         <div class="col-md-10">
-                                            <div class="form-check form-switch mb-3" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="customSwitchsizesm" checked>
-                                                <label class="form-check-label" for="customSwitchsizesm">M-Pesa</label>
+                                            <input class="form-control" name="lastName" type="text" placeholder="Masirika" id="example-text-input">
+                                        </div>
+                                        </div>
+
+                                        <!-- Email -->
+                                        <div class="mb-3 row">
+                                            <label for="example-text-input" class="col-md-2 col-form-label">Email</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="email" type="email" placeholder="Email" id="example-text-input">
                                             </div>
                                         </div>
-                                    </div>
 
-                              <!-- Submit-->
-                              <div class="mb-3 row">
-                                <label for="example-text-input" class="col-md-2 col-form-label"></label>
-                                <div class="col-md-10">
-                                  <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                        <!-- Phone number -->
+                                        <!-- Airtel number -->
+                                        <div class="mb-3 row">
+                                            <label for="example-tel-input" class="col-md-2 col-form-label">Airtel</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="airtel" type="tel" placeholder="+243825494121" id="example-tel-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="example-tel-input" class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10">
+                                                <div class="form-check form-switch mb-3" dir="ltr">
+                                                    <input type="checkbox" class="form-check-input" name="airtelMoney" value="Yes" id="customSwitchsizesm" checked>
+                                                    <label class="form-check-label" for="customSwitchsizesm">Airtel Money</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Vodacom number -->
+                                        <div class="mb-3 row">
+                                            <label for="example-tel-input" class="col-md-2 col-form-label">Vodacom</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" name="vodacom" type="tel" placeholder="+243825494121" id="example-tel-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="example-tel-input" class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10">
+                                                <div class="form-check form-switch mb-3" dir="ltr">
+                                                    <input type="checkbox" class="form-check-input" name="mPesa" value="Yes" id="customSwitchsizesm" checked>
+                                                    <label class="form-check-label" for="customSwitchsizesm">M-Pesa</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <!-- Submit-->
+                                    <div class="mb-3 row">
+                                        <label for="example-text-input" class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-10">
+                                                <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                            </div>
+                                    </div>
+                                </form>
                                 </div>
                             </div>
-                            </div>
-                          </form>
-                                </div>
                             </div>
                         </div> <!-- end col -->
                     </div>

@@ -3,7 +3,7 @@ const route = express.Router();
 
 const {
   form,
-  login,
+  loginPage,
   admin,
   addInstructions,
   listInstructions,
@@ -21,7 +21,7 @@ const {
 } = require('../controllors/pages');
 
 route.get('/', form);
-route.get('/login', login);
+route.get('/login', loginPage);
 route.get('/admin', admin);
 route.get('/admin/add-cartographes', addCartographe);
 route.get('/admin/add-user', addUser);

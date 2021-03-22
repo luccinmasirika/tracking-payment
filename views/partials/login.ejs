@@ -9,15 +9,32 @@
               Sign in to continue to PaymentTracker-GRID3-Mappers.
             </p>
           </div>
+
           <div class="p-2 mt-4">
-            <form action="/admin">
+            <% if(locals.flash){%>
+            <div
+              class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') && 'danger' %> alert-dismissible fade show"
+              role="alert"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+              <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+              <%=locals.flash.Error%>
+            </div>
+            <%}%>
+
+            <form action="/login" method="post">
               <div class="mb-3">
                 <label class="form-label" for="username">Email</label>
                 <input
                   type="email"
                   class="form-control"
                   id="username"
-                  value="admin.tracker@gmail.com"
+                  name="email"
                   placeholder="Enter username"
                 />
               </div>
@@ -28,7 +45,7 @@
                   type="password"
                   class="form-control"
                   id="userpassword"
-                  value="adminpassword"
+                  name="password"
                   placeholder="Enter password"
                 />
               </div>
@@ -37,7 +54,6 @@
                 <button
                   class="btn btn-primary w-sm waves-effect waves-light"
                   type="submit"
-                  onclick="window.location.href='/admin'"
                 >
                   Log In
                 </button>
@@ -65,3 +81,14 @@
     </div>
   </div>
 </div>
+
+<!-- JAVASCRIPT -->
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="/assets/libs/node-waves/waves.min.js"></script>
+<script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+<script src="/assets/js/app.js"></script>

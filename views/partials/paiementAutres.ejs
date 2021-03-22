@@ -20,6 +20,22 @@
                             <div class="card">
                                 <div class="card-body">
 
+                                  <% if(locals.flash){%>
+                                    <div
+                                      class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
+                                      role="alert"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"
+                                      ></button>
+                                      <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+                                      <%=locals.flash.Error || locals.flash.Success%>
+                                    </div>
+                                    <%}%>
+
                                     <h4 class="card-title">Ajoutez Lorem, ipsum dolor.</h4>
                                     <div class="mb-3 row"></div>
                                     <form>

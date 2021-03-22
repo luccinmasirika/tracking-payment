@@ -1,3 +1,6 @@
+const { config } = require('../config/config');
+const { read } = require('../api');
+
 /**
  * FORM SCREEN
  */
@@ -8,7 +11,7 @@ exports.form = (req, res) => {
 /**
  * LOGIN SCREEN
  */
-exports.login = (req, res) => {
+exports.loginPage = (req, res) => {
   res.render('pages/login');
 };
 
@@ -31,33 +34,72 @@ exports.addUser = (req, res) => {
 /**
  * ADD CARTOGRAPHES SCREEN
  */
-exports.addCartographe = (req, res) => {
-  const path = 'addCartographe';
-  res.render('pages/admin', { path });
+exports.addCartographe = async (req, res) => {
+  try {
+    const path = 'addCartographe';
+    res.render('pages/admin', { path });
+  } catch (err) {
+    res.redirect('/admin/add-cartographes');
+  }
 };
 
 /**
  * ADD FONCTION SCREEN
  */
 exports.addFonction = (req, res) => {
-  const path = 'addFonction';
-  res.render('pages/admin', { path });
+  try {
+    read(`fonctions/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      const path = 'addFonction';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/add-fonction');
+  }
 };
 
 /**
  * ADD FONCTIONNAIRE SCREEN
  */
 exports.addFonctionnaire = (req, res) => {
-  const path = 'addFonctionnaire';
-  res.render('pages/admin', { path });
+  try {
+    read(`fonctionnaires/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      read(`fonctions/60578cae99564a53e3bf0dc0`).then((data2) => {
+        if (data2.error) {
+          req.flash('Error', `${data2.error}`);
+        }
+        const path = 'addFonctionnaire';
+        res.render('pages/admin', { path, data, data2 });
+      });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/add-fonctionnaire');
+  }
 };
 
 /**
  * LIST CARTOGRAPHES SCREEN
  */
 exports.listCartographe = (req, res) => {
-  const path = 'listCartographe';
-  res.render('pages/admin', { path });
+  try {
+    read(`cartographes/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      const path = 'listCartographe';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/add-cartographes');
+  }
 };
 
 /**
@@ -72,8 +114,18 @@ exports.addInstructions = (req, res) => {
  * LIST INSTRUCTIONS SCREEN
  */
 exports.listInstructions = (req, res) => {
-  const path = 'listInstruction';
-  res.render('pages/admin', { path });
+  try {
+    read(`instructions/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      const path = 'listInstruction';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/add-instructions');
+  }
 };
 
 /**
@@ -88,24 +140,58 @@ exports.paiements = (req, res) => {
  * PAIEMENT PERDIEMS SCREEN
  */
 exports.paiementPerdiems = (req, res) => {
-  const path = 'paiementPerdiems';
-  res.render('pages/admin', { path });
+  try {
+    read(`forms/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      console.log('data', data);
+      const path = 'paiementPerdiems';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/paiement-perdiems');
+  }
 };
 
 /**
  * PAIEMENT SALAIRES SCREEN
  */
 exports.paiementSalaires = (req, res) => {
-  const path = 'paiementSalaires';
-  res.render('pages/admin', { path });
+  try {
+    read(`form/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      console.log('data', data);
+      const path = 'paiementSalaires';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/paiement-salaires');
+  }
 };
 
 /**
  * LIST AUTRES PAIEMENT SCREEN
  */
 exports.listAutres = (req, res) => {
-  const path = 'listPaiementAutres';
-  res.render('pages/admin', { path });
+  try {
+    read(`paiement-autres/60578cae99564a53e3bf0dc0`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      console.log('data', data);
+      const path = 'listPaiementAutres';
+      res.render('pages/admin', { path, data });
+    });
+  } catch (err) {
+    console.log(err);
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/paiement-autres');
+  }
 };
 
 /**

@@ -27,7 +27,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
 
-                                  <form>
+                                  <form action="/create/fonctionnaire/60578cae99564a53e3bf0dc0" method="POST">
 
                                   <!-- First Name -->
                                     <div class="mb-3 row">
@@ -51,12 +51,14 @@
                                   <div class="col-md-10">
                                     <select class="form-control select2" name="fonction">
                                       <option>Selectionnez une fonction</option>
-                                      <option value="ADMIN">Cartographe</option>
-                                      <option value="USER">Administrateur provincial</option>
-                                      <option value="USER">Consultant</option>
+                                      <% data2.forEach(el2 => { %>
+                                        <option value="<%=el2.name%>"><%=el2.name%></option>
+                                      <% }) %>
                                     </select>
                                   </div>
                                 </div>
+
+                                <% console.log('data2', data2) %>
 
                               <!-- Submit-->
                               <div class="mb-3 row">
@@ -77,6 +79,23 @@
                       <div class="col-12">
                         <div class="card">
                           <div class="card-body">
+
+                            <% if(locals.flash){%>
+                              <div
+                                class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
+                                role="alert"
+                              >
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="alert"
+                                  aria-label="Close"
+                                ></button>
+                                <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+                                <%=locals.flash.Error || locals.flash.Success%>
+                              </div>
+                              <%}%>
+
                               <h4 class="card-title">Liste de fonctionnaires</h4>
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 

@@ -19,6 +19,22 @@
                       <div class="row">
                         <div class="col-lg-12">
 
+                            <% if(locals.flash){%>
+                                <div
+                                  class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
+                                  role="alert"
+                                >
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                  ></button>
+                                  <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+                                  <%=locals.flash.Error || locals.flash.Success%>
+                                </div>
+                                <%}%>
+
                             <div class="table-responsive mb-4">
                                 <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
