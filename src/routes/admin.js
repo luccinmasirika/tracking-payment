@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { signin, createCartographe, createFonction } = require('../controllors/admin');
+const {
+  signin,
+  createCartographe,
+  createFonction,
+  createFonctionnaire,
+} = require('../controllors/admin');
 
 //USER
 router.post('/login', signin);
@@ -11,9 +16,9 @@ router.put('/update/fonction/:userId', createFonction);
 router.delete('/remove/fonction/:userId', createFonction);
 
 //FONCTIONNAIRE
-router.post('/create/fonctionnaire/:userId', createCartographe);
-router.put('/update/fonctionnaire/:userId', createCartographe);
-router.delete('/remove/cartographefonctionnaire/:userId', createCartographe);
+router.post('/create/fonctionnaire/:userId', createFonctionnaire);
+router.put('/update/fonctionnaire/:userId', createFonctionnaire);
+router.delete('/remove/fonctionnaire/:userId', createFonctionnaire);
 
 //CARTOGRAPHE
 router.post('/create/cartographe/:userId', createCartographe);

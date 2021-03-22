@@ -23,6 +23,22 @@
                             <div class="card">
                                 <div class="card-body">
 
+                                  <% if(locals.flash){%>
+                                    <div
+                                      class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
+                                      role="alert"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"
+                                      ></button>
+                                      <strong><%= Object.keys(locals.flash)[0] %> !</strong>
+                                      <%=locals.flash.Error || locals.flash.Success%>
+                                    </div>
+                                    <%}%>
+
                                     <h4 class="card-title">Ajouter un nouveau fonctionnaire</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
@@ -58,8 +74,6 @@
                                   </div>
                                 </div>
 
-                                <% console.log('data2', data2) %>
-
                               <!-- Submit-->
                               <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-2 col-form-label"></label>
@@ -80,22 +94,6 @@
                         <div class="card">
                           <div class="card-body">
 
-                            <% if(locals.flash){%>
-                              <div
-                                class="alert alert-<%=(Object.keys(locals.flash)[0]=='Error') ? 'danger' : 'success' %> alert-dismissible fade show"
-                                role="alert"
-                              >
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="alert"
-                                  aria-label="Close"
-                                ></button>
-                                <strong><%= Object.keys(locals.flash)[0] %> !</strong>
-                                <%=locals.flash.Error || locals.flash.Success%>
-                              </div>
-                              <%}%>
-
                               <h4 class="card-title">Liste de fonctionnaires</h4>
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 
@@ -111,12 +109,12 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <% Array(5).fill(null).forEach((element, index) => { %>
+                                          <% data.forEach((el, index) => { %>
                                             <tr>
                                               <th scope="row"><%=index+1%></th>
-                                              <td>Luccin</td>
-                                              <td>Masirika</td>
-                                              <td>Gestionnaire</td>
+                                              <td><%=el.firstName%></td>
+                                              <td><%=el.lastName%></td>
+                                              <td><%=el.fonction%></td>
                                               <td class="action">
                                                 <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
                                                 <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
