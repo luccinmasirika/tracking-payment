@@ -56,7 +56,7 @@ exports.createFonction = async (req, res) => {
 //CREATE FONCTIONNAIRE
 exports.createFonctionnaire = async (req, res) => {
   try {
-    create(req.body, `fonction/create/${req.params.userId}`).then((data) => {
+    create(req.body, `fonctionnaire/create/${req.params.userId}`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-fonctionnaire');
