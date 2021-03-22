@@ -23,7 +23,7 @@
 
                                     <h4 class="card-title">Ajoutez une lettre d'instruction</h4>
                                     <div class="mb-3 row"></div>
-                                    <form>
+                                    <form action="/create/instruction/60578cae99564a53e3bf0dc0" method="POST">
                                       <div class="row">
                                         <div class="col-lg-12">
                                            <!-- Date-->
@@ -37,6 +37,7 @@
                                                 data-date-format="dd M, yyyy"
                                                 data-date-container="#datepicker2"
                                                 data-provide="datepicker"
+                                                name="date"
                                                 data-date-autoclose="true"
                                               />
 
@@ -71,12 +72,11 @@
                                             <label class="form-label"
                                               >Agent d'affectation</label
                                             >
-                                            <select class="form-control select2" name="name">
+                                            <select class="form-control select2" name="agent">
                                               <option>Cliquer pour selectionner un agent</option>
-                                              <option value="AK">Luccin Masirika</option>
-                                              <option value="HI">Nicolas Tesla</option>
-                                              <option value="HI">Isaac Newton</option>
-                                              <option value="HI">Albert Einstein</option>
+                                              <% data.forEach(el => { %>
+                                                <option value="<%=el.firstName%> <%=el.lastName%>"><%=el.firstName%> <%=el.lastName%></option>
+                                              <% }) %>
                                             </select>
                                           </div>
 
@@ -89,7 +89,7 @@
                                               class="form-control"
                                               type="text"
                                               id="default-input"
-                                              name="bank"
+                                              name="libelle"
                                               placeholder="Libellé"
                                             />
                                           </div>
@@ -102,7 +102,7 @@
                                             <textarea
                                               class="form-control"
                                               rows="3"
-                                              name="comment"
+                                              name="description"
                                               placeholder="Description"
                                             ></textarea>
                                           </div>
@@ -110,7 +110,7 @@
                                           <!-- Submit-->
                                           <div class="mb-3">
                                             <button
-                                              type="button"
+                                              type="submit"
                                               class="btn btn-primary waves-effect waves-light"
                                             >
                                               Enregistrer <i class="uil uil-arrow-right ms-2"></i>

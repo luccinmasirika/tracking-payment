@@ -81,6 +81,7 @@ exports.createInstruction = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-instruction');
       }
+      console.log('test', data);
       req.flash('Success', `Instruction letter added`);
       res.redirect('/admin/instructions');
     });

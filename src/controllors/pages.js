@@ -106,8 +106,13 @@ exports.listCartographe = (req, res) => {
  * ADD INSTRUCTIONS SCREEN
  */
 exports.addInstructions = (req, res) => {
-  const path = 'addInstruction';
-  res.render('pages/admin', { path });
+  read(`fonctionnaires/60578cae99564a53e3bf0dc0`).then((data) => {
+    if (data.error) {
+      req.flash('Error', `${data.error}`);
+    }
+    const path = 'addInstruction';
+    res.render('pages/admin', { path, data });
+  });
 };
 
 /**
