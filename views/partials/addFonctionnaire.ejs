@@ -39,11 +39,25 @@
                                     </div>
                                     <%}%>
 
+                                    <div
+                                          class="alert alert-success alert-dismissible fade"
+                                          role="alert"
+                                          id="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong>Success !</strong>
+                                        </div>
+
                                     <h4 class="card-title">Ajouter un nouveau fonctionnaire</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
 
-                                  <form action="/create/fonctionnaire/60578cae99564a53e3bf0dc0" method="POST">
+                                  <form id="add">
 
                                   <!-- First Name -->
                                     <div class="mb-3 row">
@@ -109,16 +123,16 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <% data.forEach((el, index) => { %>
+                                          <% data && data.forEach((el, index) => { %>
                                             <tr>
                                               <th scope="row"><%=index+1%></th>
                                               <td><%=el.firstName%></td>
                                               <td><%=el.lastName%></td>
                                               <td><%=el.fonction%></td>
                                               <td class="action">
-                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                                <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              </td>
+                                                <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
+                                                <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
+                                          </td>
                                           </tr>
                                           <% }) %>
                                       </tbody>
@@ -141,6 +155,7 @@
               <!-- End Page-content -->
 
              <!-- Footer-->
+             <%- include('./editFonctionnaire.ejs') %>
              <%- include('./footer.ejs') %>
           </div>
           <!-- end main content-->
@@ -157,15 +172,97 @@
       <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
       <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
 
-      <!-- plugins -->
-      <script src="/assets/libs/select2/js/select2.min.js"></script>
-      <script src="/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
-      <script src="/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-      <script src="/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
-      <script src="/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
-      <script src="/assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+       <!-- plugins -->
+       <script src="/assets/libs/select2/js/select2.min.js"></script>
+       <script src="/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+       <script src="/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+       <script src="/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+       <script src="/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+       <script src="/assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
 
-      <!-- init js -->
-      <script src="/assets/js/pages/form-advanced.init.js"></script>
+       <!-- init js -->
+       <script src="/assets/js/pages/form-advanced.init.js"></script>
 
-      <script src="/assets/js/app.js"></script>
+       <script src="/assets/js/app.js"></script>
+
+       <script>
+         // CREATE ELEMENT
+         $(document).ready(function () {
+          $("#add").submit(function (event) {
+                    var formData = {
+                        firstName: $("#firstName").val(),
+                        lastName: $("#lastName").val(),
+                        fonction: $("#fonction").val()
+                    };
+
+                    $.ajax({
+                    type: "POST",
+                    url: "/fonctionnaire/create",
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                    }).done(function (data) {
+                        console.log(data)
+                        $('#alert').addClass('show')
+                        $('#refresh').load(document.URL +  ' #refresh');
+                    });
+
+                    event.preventDefault();
+                });
+
+         });
+
+       </script>
+
+       <script>
+        $(document).ready(function () {
+
+          // GET BY ID CLICK
+          $('body').on('click', '.update',function(){
+              const id =  $(this).attr('data-id');
+              const API = $(this).attr('data-api');
+
+              //GET ELEMENTS
+              $.get(`${API.trim()}/fonctionnaire/${id}`, function(data, status){
+                document.getElementById("firstName").value = data.firstName;
+                document.getElementById("lastName").value = data.lastName;
+                document.getElementById("fonction").value = data.fonction;
+
+                //UPDATE ELEMENTS
+                $("#form").submit(function (event) {
+                  var formData = {
+                        firstName: $("#firstName").val(),
+                        lastName: $("#lastName").val(),
+                        fonction: $("#fonction").val()
+                    };
+
+                    $.ajax({
+                    type: "POST",
+                    url: `${API.trim()}/fonctionnaire/${id}?_method=PUT`,
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                    }).done(function (data) {
+                        $('#alert').addClass('show')
+                        $('#refresh').load(document.URL +  ' #refresh');
+                    });
+
+                    event.preventDefault();
+                });
+
+              });
+              });
+
+              //DELETE FORM
+              $('body').on('click', '.remove',function(){
+              const id =  $(this).attr('data-id');
+              const API = $(this).attr('data-api');
+              $.post(`${API.trim()}/fonctionnaire/${id}?_method=DELETE`, function(data, status){
+                console.log(data)
+                $('#alert').addClass('show')
+                $('#refresh').load(document.URL +  ' #refresh');
+              });
+              });
+
+        });
+        </script>

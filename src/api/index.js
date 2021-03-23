@@ -2,7 +2,7 @@ const axios = require('axios');
 const { config } = require('../config/config');
 const API = config.server.api;
 
-//SIGNIN
+//SIGNUP
 exports.signin = async (user) => {
   try {
     const response = await axios.post(`${API}/signin`, user);
@@ -33,9 +33,9 @@ exports.read = async (url) => {
 };
 
 //REMOVE
-exports.remove = async (url) => {
+exports.update = async (url) => {
   try {
-    const response = await axios.get(`${API}/${url}`);
+    const response = await axios.put(`${API}/${url}`);
     return response.data;
   } catch (err) {
     return err.response.data;

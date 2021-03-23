@@ -52,27 +52,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <% Array(24).fill(null).forEach((el, index) => { %>
+                                       <% data && data.forEach((el, index) => { %>
                                         <tr>
                                           <td><a href="javascript: void(0);" class="text-dark fw-bold">LI0<%=index + 1 %> </a> </td>
                                           <td>
-                                              Paiement salaires (Phase 1)
+                                              <%=el.payment%>
                                           </td>
                                           <td>
-                                            $141
+                                            <%=el.montant%>$
                                           </td>
-                                          <td>Luccin Mas...</td>
-                                          <td>Exemplaire</td>
-                                          <td>12 Mars 2017</td>
+                                          <td><%=el.firstName%>...</td>
+                                          <td><%=el.refference%></td>
+                                          <td><%=el.date%></td>
 
                                           <td>
                                               <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
                                               <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
                                               <button type="button" data-bs-toggle="modal" data-bs-target=".instructionPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
-                                          <td>Test</td>
-                                          <td>Nord-Kivu</td>
-                                          <td>Lorem ipsum dolor...</td>
+                                          <td><%=el.libelle%></td>
+                                          <td><%=el.province%></td>
+                                          <td><%=el.description%>...</td>
                                       </tr>
                                        <% }) %>
                                     </tbody>

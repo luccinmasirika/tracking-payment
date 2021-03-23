@@ -3,8 +3,8 @@ const { errorHandler } = require('../helpers/dbErrorHandler'); // Authorizations
 
 // Fonction by id
 exports.getByID = (req, res, next, id) => {
-  Fonction.findById(id).exec((error, Fonction) => {
-    if (error || !Fonction) {
+  Fonction.findById(id).exec((error, fonction) => {
+    if (error || !fonction) {
       return res.status(400).json({ error: 'Fonction not found' });
     }
     req.fonction = fonction;

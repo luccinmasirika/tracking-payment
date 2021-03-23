@@ -1,26 +1,47 @@
-const { signin, create } = require('../api');
+const { signin, create, update } = require('../api');
+const axios = require('axios');
+const { config } = require('../config/config');
+const API = config.server.api;
 
 // SIGNIN
 exports.signin = async (req, res) => {
   try {
-    signin(req.body).then((data) => {
+    const response = await axios.post(`${API}/signin`, req.body);
+    if (response.data.error) {
+      req.flash('Error', `${data.error}`);
+      res.status(400).redirect('/login');
+    }
+    console.log('data', response.data);
+    res.redirect('/admin');
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    console.log('data', err);
+    return res.status(400).redirect('/login');
+  }
+};
+
+// SIGNUP
+exports.signup = async (req, res) => {
+  try {
+    create(req.body, `signup`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
-        res.redirect('/login');
+        res.redirect('/admin/add-user');
       }
-      req.session.user = data;
       console.log('data', data);
-      res.redirect('/admin');
+      req.flash('Success', `${data.firstName} ${data.lastName} added`);
+      res.redirect('/admin/add-user');
     });
   } catch (err) {
-    console.log('err2', err);
+    console.log(err);
+    res.redirect('/admin/add-user');
   }
 };
 
 //CREATE CARTOGRAPHE
 exports.createCartographe = async (req, res) => {
   try {
-    create(req.body, `cartographe/create/${req.params.userId}`).then((data) => {
+    create(req.body, `cartographe/create`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-cartographes');
@@ -35,10 +56,28 @@ exports.createCartographe = async (req, res) => {
   }
 };
 
+//UPDATE CARTOGRAPHE
+exports.updateCartographe = async (req, res) => {
+  try {
+    update(req.body, `cartographe`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+        res.redirect('/admin/add-cartographes');
+      }
+      console.log('data1', data);
+      req.flash('Success', `${data.firstName} ${data.lastName} Updated`);
+      res.redirect('/admin/cartographes');
+    });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/admin/add-cartographes');
+  }
+};
+
 //CREATE FONCTION
 exports.createFonction = async (req, res) => {
   try {
-    create(req.body, `fonction/create/${req.params.userId}`).then((data) => {
+    create(req.body, `fonction/create`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-fonction');
@@ -56,17 +95,15 @@ exports.createFonction = async (req, res) => {
 //CREATE FONCTIONNAIRE
 exports.createFonctionnaire = async (req, res) => {
   try {
-    create(req.body, `fonctionnaire/create/${req.params.userId}`).then(
-      (data) => {
-        if (data.error) {
-          req.flash('Error', `${data.error}`);
-          res.redirect('/admin/add-fonctionnaire');
-        }
-        console.log('data', data);
-        req.flash('Success', `${data.firstName} ${data.lastName} added`);
+    create(req.body, `fonctionnaire/create`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-fonctionnaire');
       }
-    );
+      console.log('data', data);
+      req.flash('Success', `${data.firstName} ${data.lastName} added`);
+      res.redirect('/admin/add-fonctionnaire');
+    });
   } catch (err) {
     console.log(err);
     res.redirect('/admin/add-fonctionnaire');
@@ -76,7 +113,7 @@ exports.createFonctionnaire = async (req, res) => {
 //CREATE INSTRUCTION
 exports.createInstruction = async (req, res) => {
   try {
-    create(req.body, `instruction/create/${req.params.userId}`).then((data) => {
+    create(req.body, `instruction/create`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-instruction');
@@ -94,7 +131,7 @@ exports.createInstruction = async (req, res) => {
 //CREATE PAIEMENT
 exports.createPaiement = async (req, res) => {
   try {
-    create(req.body, `paiement/create/${req.params.userId}`).then((data) => {
+    create(req.body, `paiement/create`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/paiements');
@@ -111,19 +148,36 @@ exports.createPaiement = async (req, res) => {
 //CREATE PAIEMENT
 exports.createPaiementAutre = async (req, res) => {
   try {
-    create(req.body, `paiement-autre/create/${req.params.userId}`).then(
-      (data) => {
-        if (data.error) {
-          req.flash('Error', `${data.error}`);
-          res.redirect('/admin/add-autres-paiements');
-        } else {
-          req.flash('Success', `Payment added`);
-          res.redirect('/admin/autres-paiements');
-        }
+    create(req.body, `paiement-autre/create`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+        res.redirect('/admin/add-autres-paiements');
+      } else {
+        req.flash('Success', `Payment added`);
+        res.redirect('/admin/autres-paiements');
       }
-    );
+    });
   } catch (err) {
     req.flash('Error', `${err}`);
     res.redirect('/admin/add-autres-paiements');
+  }
+};
+
+//CREATE FORM
+exports.createForm = async (req, res) => {
+  try {
+    create(req.body, `form/create`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+        res.redirect('/');
+      } else {
+        req.flash('Success', `Form submeted`);
+        res.redirect('/');
+      }
+      console.log('data', data);
+    });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
   }
 };

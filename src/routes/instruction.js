@@ -11,11 +11,11 @@ const {
   getByID,
 } = require('../controllors/instruction');
 
-router.post('/instruction/create/:userId', create);
-router.get('/instruction/:userId/:id', read);
-router.get('/instructions/:userId', readAll);
-router.put('/instruction/:userId/:id', update);
-router.delete('/instruction/:userId/:id', remove);
+router.post('/instruction/create', create);
+router.get('/instruction/:id', read);
+router.get('/instructions', readAll);
+router.put('/instruction/:id', update);
+router.delete('/instruction/:id', remove);
 
 router.param('id', getByID);
 router.param('userId', getUserByID);

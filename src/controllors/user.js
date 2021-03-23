@@ -14,10 +14,14 @@ exports.readUser = async (req, res) => {
 // Get all users
 exports.readAllUsers = (req, res) => {
   try {
-    User.find().sort([['createdAt', 'desc']]).exec((err, users) => {
-      if (err) return res.status(400).json({ error: 'No user found' });
-      return res.json(users);
-    });
+    User.find({})
+      .sort([['createdAt', 'desc']])
+      .exec((err, users) => {
+        if (err) return res.status(400).json({ error: 'No user found' });
+        users.salt = undefined;
+        users.hashed_password = undefined;
+        return res.json(users);
+      });
   } catch (err) {
     return res.status(400).json({ error: 'Something wont wrong' + err });
   }

@@ -39,17 +39,31 @@
                                     </div>
                                     <%}%>
 
+                                    <div
+                                          class="alert alert-success alert-dismissible fade"
+                                          role="alert"
+                                          id="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong>Success !</strong>
+                                        </div>
+
                                     <h4 class="card-title">Ajouter une nouvelle fonction</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
 
-                                  <form action="/create/fonction/60578cae99564a53e3bf0dc0" method="POST">
+                                  <form id="add">
 
                                 <!-- Fonction -->
                                 <div class="mb-3 row">
                                   <label for="example-text-input" class="col-md-2 col-form-label">Fonction</label>
                                   <div class="col-md-10">
-                                      <input class="form-control" name="name" type="text" placeholder="Gestionnaire" id="example-text-input">
+                                      <input class="form-control" name="name" type="text" placeholder="Gestionnaire" id="name">
                                   </div>
                               </div>
 
@@ -75,7 +89,7 @@
                               <h4 class="card-title">Liste de fonctions</h4>
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 
-                              <div class="table-responsive">
+                              <div class="table-responsive" id="refresh">
                                   <table class="table table-striped mb-0">
                                       <thead>
                                           <tr>
@@ -90,8 +104,8 @@
                                               <th scope="row"><%=index+1%></th>
                                               <td><%=el.name%></td>
                                               <td class="action">
-                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                                <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                                    <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
+                                                    <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                               </td>
                                           </tr>
                                           <% }) %>
@@ -115,6 +129,7 @@
               <!-- End Page-content -->
 
              <!-- Footer-->
+             <%- include('./editFonction.ejs') %>
              <%- include('./footer.ejs') %>
           </div>
           <!-- end main content-->
@@ -132,3 +147,79 @@
       <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
 
        <script src="/assets/js/app.js"></script>
+
+       <script>
+         // CREATE ELEMENT
+         $(document).ready(function () {
+          $("#add").submit(function (event) {
+                    var formData = {
+                        name: $("#name").val()
+                    };
+
+                    $.ajax({
+                    type: "POST",
+                    url: "/fonction/create",
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                    }).done(function (data) {
+                        console.log(data)
+                        $('#alert').addClass('show')
+                        $('#refresh').load(document.URL +  ' #refresh');
+                    });
+
+                    event.preventDefault();
+                });
+
+         });
+
+       </script>
+
+       <script>
+        $(document).ready(function () {
+
+          // GET BY ID CLICK
+          $('body').on('click', '.update',function(){
+              const id =  $(this).attr('data-id');
+              const API = $(this).attr('data-api');
+
+              //GET ELEMENTS
+              $.get(`${API.trim()}/fonction/${id}`, function(data, status){
+                document.getElementById("name").value = data.name;
+
+                //UPDATE ELEMENTS
+                $("#form").submit(function (event) {
+                    var formData = {
+                        name: $("#name").val()
+                    };
+
+                    $.ajax({
+                    type: "POST",
+                    url: `${API.trim()}/fonction/${id}?_method=PUT`,
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                    }).done(function (data) {
+                        $('#alert').addClass('show')
+                        $('#refresh').load(document.URL +  ' #refresh');
+                    });
+
+                    event.preventDefault();
+                });
+
+              });
+              });
+
+              //DELETE FORM
+              $('body').on('click', '.remove',function(){
+              const id =  $(this).attr('data-id');
+              const API = $(this).attr('data-api');
+              $.post(`${API.trim()}/fonction/${id}?_method=DELETE`, function(data, status){
+                console.log(data)
+                $('#alert').addClass('show')
+                $('#refresh').load(document.URL +  ' #refresh');
+              });
+              });
+
+        });
+        </script>

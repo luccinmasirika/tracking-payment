@@ -14,14 +14,14 @@ exports.signup = async (req, res) => {
     if (err) return res.status(400).json({ error: err });
     user.hashed_password = undefined;
     user.salt = undefined;
-    return res.json({ user });
+    return res.json(user);
   });
 };
 
 // User Login
-exports.signin = async (req, res) => {
+exports.signin = (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email }, (err, user) => {
+  User.findOne({ email }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
         error: 'We have not find a user with this email. Please signup',
@@ -32,16 +32,13 @@ exports.signin = async (req, res) => {
     if (!user.authentificate(password)) {
       return res.status(400).json({ error: 'Email and password dont match' });
     }
-    
+
     // Generate a signed token
     const token = jwt.sign({ _id: user._id }, config.secret.signedTokenString);
 
     // Persist token in cookie
 
-    res.cookie('jwt', token, {
-      expires: new Date(Date.now() + 900000),
-      httpOnly: true,
-    });
+    res.cookie('token', token, { expire: new Date() + 999 });
 
     // Send token and user
     const { _id, name, email, role } = user;
@@ -52,7 +49,7 @@ exports.signin = async (req, res) => {
 // User Logout
 exports.signout = (req, res) => {
   try {
-    res.clearCookie('Login Token');
+    res.clearCookie('token');
     return res.json({ message: 'Logout success' });
   } catch (error) {
     return res.status(400).json({

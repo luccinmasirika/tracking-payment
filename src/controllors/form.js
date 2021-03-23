@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
   const form = new Form(req.body);
   form.save((error, form) => {
     if (error) {
-      return res.status(400).json({ error: 'Something went wrong' });
+      return res.status(400).json({ error: 'Something went wrong' + error });
     }
     res.json(form);
   });

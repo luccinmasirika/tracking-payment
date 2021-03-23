@@ -5,7 +5,27 @@ const { read } = require('../api');
  * FORM SCREEN
  */
 exports.form = (req, res) => {
-  res.render('pages/form');
+  try {
+    read(`cartographes`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      read(`fonctionnaires`).then((data2) => {
+        if (data2.error) {
+          req.flash('Error', `${data2.error}`);
+        }
+        read(`paiements`).then((data3) => {
+          if (data3.error) {
+            req.flash('Error', `${data3.error}`);
+          }
+          res.render('pages/form', { data: [...data, ...data2], data3 });
+        });
+      });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/');
+  }
 };
 
 /**
@@ -27,8 +47,20 @@ exports.admin = (req, res) => {
  * USERS SCREEN
  */
 exports.addUser = (req, res) => {
-  const path = 'addUser';
-  res.render('pages/admin', { path });
+  try {
+    read(`users`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+      }
+      const path = 'addUser';
+
+      const api = config.server.api;
+      res.render('pages/admin', { path, data, api });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/add-fonction');
+  }
 };
 
 /**
@@ -37,8 +69,28 @@ exports.addUser = (req, res) => {
 exports.addCartographe = async (req, res) => {
   try {
     const path = 'addCartographe';
+    const api = config.server.api;
     res.render('pages/admin', { path });
   } catch (err) {
+    res.redirect('/admin/add-cartographes');
+  }
+};
+
+/**
+ * EDIT CARTOGRAPHES SCREEN
+ */
+exports.editCartographe = async (req, res) => {
+  try {
+    read(`cartographe/${req.params.id}`).then((edit) => {
+      if (edit.error) {
+        req.flash('Error', `${edit.error}`);
+      }
+      const path = 'listCartographe';
+      const api = config.server.api;
+      res.render('pages/admin', { path, edit });
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
     res.redirect('/admin/add-cartographes');
   }
 };
@@ -48,12 +100,13 @@ exports.addCartographe = async (req, res) => {
  */
 exports.addFonction = (req, res) => {
   try {
-    read(`fonctions/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`fonctions`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
       const path = 'addFonction';
-      res.render('pages/admin', { path, data });
+      const api = config.server.api;
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     req.flash('Error', `${err}`);
@@ -66,16 +119,17 @@ exports.addFonction = (req, res) => {
  */
 exports.addFonctionnaire = (req, res) => {
   try {
-    read(`fonctionnaires/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`fonctionnaires`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      read(`fonctions/60578cae99564a53e3bf0dc0`).then((data2) => {
+      read(`fonctions`).then((data2) => {
         if (data2.error) {
           req.flash('Error', `${data2.error}`);
         }
         const path = 'addFonctionnaire';
-        res.render('pages/admin', { path, data, data2 });
+        const api = config.server.api;
+        res.render('pages/admin', { path, data, data2, api });
       });
     });
   } catch (err) {
@@ -89,12 +143,13 @@ exports.addFonctionnaire = (req, res) => {
  */
 exports.listCartographe = (req, res) => {
   try {
-    read(`cartographes/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`cartographes`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
       const path = 'listCartographe';
-      res.render('pages/admin', { path, data });
+      const api = config.server.api;
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     req.flash('Error', `${err}`);
@@ -106,12 +161,13 @@ exports.listCartographe = (req, res) => {
  * ADD INSTRUCTIONS SCREEN
  */
 exports.addInstructions = (req, res) => {
-  read(`fonctionnaires/60578cae99564a53e3bf0dc0`).then((data) => {
+  read(`fonctionnaires`).then((data) => {
     if (data.error) {
       req.flash('Error', `${data.error}`);
     }
     const path = 'addInstruction';
-    res.render('pages/admin', { path, data });
+    const api = config.server.api;
+    res.render('pages/admin', { path, data, api });
   });
 };
 
@@ -120,12 +176,13 @@ exports.addInstructions = (req, res) => {
  */
 exports.listInstructions = (req, res) => {
   try {
-    read(`instructions/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`instructions`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
       const path = 'listInstruction';
-      res.render('pages/admin', { path, data });
+      const api = config.server.api;
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     req.flash('Error', `${err}`);
@@ -138,12 +195,13 @@ exports.listInstructions = (req, res) => {
  */
 exports.paiements = (req, res) => {
   try {
-    read(`paiements/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`paiements`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
       const path = 'paiements';
-      res.render('pages/admin', { path, data });
+      const api = config.server.api;
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     req.flash('Error', `${err}`);
@@ -156,13 +214,13 @@ exports.paiements = (req, res) => {
  */
 exports.paiementPerdiems = (req, res) => {
   try {
-    read(`forms/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`forms`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      console.log('data', data);
       const path = 'paiementPerdiems';
-      res.render('pages/admin', { path, data });
+      const api = config.server.api;
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     req.flash('Error', `${err}`);
@@ -175,13 +233,13 @@ exports.paiementPerdiems = (req, res) => {
  */
 exports.paiementSalaires = (req, res) => {
   try {
-    read(`form/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`form`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      console.log('data', data);
+      const api = config.server.api;
       const path = 'paiementSalaires';
-      res.render('pages/admin', { path, data });
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     req.flash('Error', `${err}`);
@@ -194,13 +252,13 @@ exports.paiementSalaires = (req, res) => {
  */
 exports.listAutres = (req, res) => {
   try {
-    read(`paiement-autres/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`paiement-autres`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      console.log('data', data);
+      const api = config.server.api;
       const path = 'listPaiementAutres';
-      res.render('pages/admin', { path, data });
+      res.render('pages/admin', { path, data, api });
     });
   } catch (err) {
     console.log(err);
@@ -214,15 +272,16 @@ exports.listAutres = (req, res) => {
  */
 exports.autres = (req, res) => {
   try {
-    read(`paiements/60578cae99564a53e3bf0dc0`).then((data) => {
+    read(`paiements`).then((data) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      read(`fonctionnaires/60578cae99564a53e3bf0dc0`).then((data2) => {
+      read(`fonctionnaires`).then((data2) => {
         if (data2.error) {
           req.flash('Error', `${data2.error}`);
         }
         const path = 'paiementAutres';
+        const api = config.server.api;
         const provinces = [
           'Bas-Uele',
           'Équateur',
@@ -251,7 +310,7 @@ exports.autres = (req, res) => {
           'Tshopo',
           'Tshuapa',
         ];
-        res.render('pages/admin', { path, provinces, data, data2 });
+        res.render('pages/admin', { path, provinces, data, api, data2 });
       });
     });
   } catch (err) {

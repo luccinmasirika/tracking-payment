@@ -53,7 +53,21 @@
                                         </div>
                                         <%}%>
 
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <div
+                                          class="alert alert-success alert-dismissible fade show hidden"
+                                          role="alert"
+                                          id="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong>Deleted !</strong>
+                                        </div>
+
+                                    <table id="cartographe" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -90,8 +104,8 @@
                                                 </td>
                                                 <td><%=el.email%></td>
                                                 <td class="action">
-                                                    <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                                    <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".editCartographe" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
+                                                    <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                                 </td>
                                             </tr>
                                         <% }) %>
@@ -111,14 +125,13 @@
               <!-- End Page-content -->
 
              <!-- Footer-->
+             <%- include('./editModalCartographe.ejs') %>
              <%- include('./footer.ejs') %>
           </div>
           <!-- end main content-->
 
       </div>
       <!-- END layout-wrapper -->
-
-      <% console.log('test de test', data) %>
 
       <!-- JAVASCRIPT -->
       <script src="/assets/libs/jquery/jquery.min.js"></script>
@@ -146,3 +159,62 @@
       <script src="/assets/js/pages/datatables.init.js"></script>
 
       <script src="/assets/js/app.js"></script>
+
+
+    <script>
+    $(document).ready(function () {
+
+      $('body').on('click', '.update',function(){
+          const id =  $(this).attr('data-id');
+          const API = $(this).attr('data-api');
+          $.get(`${API.trim()}/cartographe/${id}`, function(data, status){
+            let a = document.getElementById("firstName").value = data.firstName;
+            let b = document.getElementById("lastName").value = data.lastName;
+            let c = document.getElementById("email").value = data.email;
+            let d = document.getElementById("airtel").value = data.airtel;
+            const ai = document.getElementById("airtelMoney").value = data.airtelMoney;
+            let e = document.getElementById("airtelMoney").checked = ai==='No' ? false : true;
+            let f = document.getElementById("vodacom").value = data.vodacom;
+            const mp = document.getElementById("mPesa").value = data.mPesa;
+            let g = document.getElementById("mPesa").checked = mp ==='No' ? false : true;
+
+            $("#form").submit(function (event) {
+                var formData = {
+                    firstName: $("#firstName").val(),
+                    lastName: $("#lastName").val(),
+                    email: $("#email").val(),
+                    airtel: $("#airtel").val(),
+                    airtelMoney: $("#airtelMoney").val(),
+                    vodacom: $("#vodacom").val(),
+                    mPesa: $("#mPesa").val(),
+                };
+
+                $.ajax({
+                type: "POST",
+                url: `${API.trim()}/cartographe/${id}?_method=PUT`,
+                data: formData,
+                dataType: "json",
+                encode: true,
+                }).done(function (data) {
+                    console.log(data)
+                    $('#update').removeClass('hidden')
+                    $('#cartographe').load(document.URL +  ' #cartographe');
+                });
+
+                event.preventDefault();
+            });
+
+          });
+          });
+
+          $('body').on('click', '.remove',function(){
+          const id =  $(this).attr('data-id');
+          const API = $(this).attr('data-api');
+          $.post(`${API.trim()}/cartographe/${id}?_method=DELETE`, function(data, status){
+            $('#alert').removeClass('hidden')
+            $('#cartographe').load(document.URL +  ' #cartographe');
+          });
+          });
+
+    });
+    </script>

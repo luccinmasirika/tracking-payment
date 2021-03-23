@@ -10,7 +10,6 @@ const cartographeSchema = new mongoose.Schema(
     province: { type: String, trim: true, required: true },
     date: { type: String, trim: true, required: true },
     description: { type: String, trim: true, required: true }
-
   },
   { timestamps: true }
 );

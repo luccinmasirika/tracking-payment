@@ -9,10 +9,10 @@ const {
   remove,
 } = require('../controllors/user');
 
-router.get('/user/:userId', requireSignin, isAuth, readUser);
-router.get('/users/:userId', requireSignin, isAuth, isAdmin, readAllUsers);
-router.put('/user/:userId', requireSignin, isAuth, updateUser);
-router.delete('/user/:userId', requireSignin, isAuth, remove);
+router.get('/user', readUser);
+router.get('/users', readAllUsers);
+router.put('/user', updateUser);
+router.delete('/user', remove);
 
 router.param('userId', getUserByID);
 
