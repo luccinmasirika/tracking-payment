@@ -39,6 +39,20 @@
                                     </div>
                                     <%}%>
 
+                                    <div
+                                          class="alert alert-success alert-dismissible fade show hidden"
+                                          role="alert"
+                                          id="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong>Deleted !</strong>
+                                        </div>
+
                                     <h4 class="card-title">Ajouter un nouveau utilisateur</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
@@ -111,7 +125,7 @@
                               <h4 class="card-title">Liste des utilisateurs</h4>
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 
-                              <div class="table-responsive">
+                              <div class="table-responsive" id="refresh">
                                   <table class="table table-striped mb-0">
                                       <thead>
                                           <tr>
@@ -132,8 +146,7 @@
                                               <td><%=el.email%></td>
                                               <td><%=el.role%></td>
                                               <td class="action">
-                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
+                                                <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                               </td>
                                           </tr>
                                           <% }) %>
@@ -187,3 +200,18 @@
       <script src="/assets/js/pages/form-advanced.init.js"></script>
 
       <script src="/assets/js/app.js"></script>
+
+      <script>
+        $(document).ready(function () {
+          //DELETE FORM
+          $('body').on('click', '.remove',function(){
+                $('.alert').alert()
+                const id =  $(this).attr('data-id');
+                const API = $(this).attr('data-api');
+              $.post(`${API.trim()}/user/${id}?_method=DELETE`, function(data, status){
+                $('#alert').removeClass('hidden');
+                $('#refresh').load(document.URL +  ' #refresh');
+              });
+              });
+        });
+      </script>

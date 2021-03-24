@@ -35,7 +35,21 @@
                                 </div>
                                 <%}%>
 
-                            <div class="table-responsive mb-4">
+                                <div
+                                          class="alert alert-success alert-dismissible fade show hidden"
+                                          role="alert"
+                                          id="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong>Deleted !</strong>
+                                        </div>
+
+                            <div class="table-responsive mb-4" id="refresh">
                                 <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
                                         <tr>
@@ -45,34 +59,34 @@
                                             <th>Bénéficiaire</th>
                                             <th>Réfference</th>
                                             <th>Date</th>
-                                            <th style="width: 120px;">Action</th>
                                             <th>Libellé</th>
                                             <th>Province</th>
+                                            <th style="width: 120px;">Action</th>
                                             <th>Description</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                        <% data && data.forEach((el, index) => { %>
                                         <tr>
-                                          <td><a href="javascript: void(0);" class="text-dark fw-bold">LI0<%=index + 1 %> </a> </td>
+                                          <td><a href="javascript: void(0);" class="text-dark fw-bold"><%=index + 1 %> </a> </td>
                                           <td>
                                               <%=el.payment%>
                                           </td>
                                           <td>
                                             <%=el.montant%>$
                                           </td>
-                                          <td><%=el.firstName%>...</td>
+                                          <td>
+                                            <%=el.agent.substring(0,15)%>...
+                                          </td>
                                           <td><%=el.refference%></td>
                                           <td><%=el.date%></td>
-
-                                          <td>
-                                            <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
-                                            <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
-                                            <button type="button" data-bs-toggle="modal" data-bs-target=".instructionPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
-                                          </td>
                                           <td><%=el.libelle%></td>
                                           <td><%=el.province%></td>
-                                          <td><%=el.description%>...</td>
+                                          <td>
+                                            <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target=".preview" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                          </td>
+                                          <td><%=el.description%></td>
                                       </tr>
                                        <% }) %>
                                     </tbody>
@@ -80,6 +94,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     </div>
                     <!-- end row -->
@@ -92,6 +107,7 @@
 
 
              <!-- Footer-->
+             <%- include('./paiementAutresDetail.ejs') %>
              <%- include('./editPaiementAutre.ejs') %>
              <%- include('./footer.ejs') %>
           </div>
@@ -123,7 +139,13 @@
       <!-- init js -->
       <script src="/assets/js/pages/ecommerce-datatables.init.js"></script>
 
+      <!-- Datatable init js -->
+      <script src="/assets/js/pages/datatables.init.js"></script>
+
+
       <script src="/assets/js/app.js"></script>
+
+      <% console.log('data1', data) %>
 
       <script>
        $(document).ready(function () {
@@ -134,10 +156,10 @@
              const API = $(this).attr('data-api');
 
              //GET ELEMENTS
-             $.get(`${API.trim()}/paiement-autres/${id}`, function(data, status){
+             $.get(`${API.trim()}/paiement-autre/${id}`, function(data, status){
                document.getElementById("payment").value =  data.payment;
-               document.getElementById("montant").value =  data.montant;
-               document.getElementById("firstName").value =  data.firstName;
+               document.getElementById("montant").innerText =  data.montant;
+               document.getElementById("agent").value =  data.agent;
                document.getElementById("refference").value =  data.refference;
                document.getElementById("date").value =  data.date;
                document.getElementById("libelle").value =  data.libelle;
@@ -149,7 +171,7 @@
                  var formData = {
                     payment: $("#payment").val(),
                     montant: $("#montant").val(),
-                    firstName: $("#firstName").val(),
+                    agent: $("#agent").val(),
                     refference: $("#refference").val(),
                     date: $("#date").val(),
                     libelle: $("#libelle").val(),
@@ -159,7 +181,7 @@
 
                    $.ajax({
                    type: "POST",
-                   url: `${API.trim()}/paiement-autres/${id}?_method=PUT`,
+                   url: `${API.trim()}/paiement-autre/${id}?_method=PUT`,
                    data: formData,
                    dataType: "json",
                    encode: true,
@@ -178,7 +200,7 @@
              $('body').on('click', '.remove',function(){
                const id =  $(this).attr('data-id');
                const API = $(this).attr('data-api');
-             $.post(`${API.trim()}/paiement-autres/${id}?_method=DELETE`, function(data, status){
+             $.post(`${API.trim()}/paiement-autre/${id}?_method=DELETE`, function(data, status){
               $('#alert').removeClass('hidden')
                $('#refresh').load(document.URL +  ' #refresh');
              });

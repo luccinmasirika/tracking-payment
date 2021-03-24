@@ -163,6 +163,25 @@ exports.createPaiementAutre = async (req, res) => {
   }
 };
 
+
+//AUTRES PAIEMENT
+exports.updatePaiementAutre = async (req, res) => {
+  try {
+    create(req.body, `paiement-autre/${req.params.id}`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+        res.redirect('/admin/autres-paiements');
+      } else {
+        req.flash('Success', `Payment updated`);
+        res.redirect('/admin/autres-paiements');
+      }
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/autres-paiements');
+  }
+};
+
 //CREATE FORM
 exports.createForm = async (req, res) => {
   try {

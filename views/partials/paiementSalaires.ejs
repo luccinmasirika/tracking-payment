@@ -10,7 +10,7 @@
                       <div class="row">
                           <div class="col-12">
                               <div class="page-title-box d-flex align-items-center justify-content-between">
-                                  <h4 class="mb-0">Paiement de salires</h4>
+                                  <h4 class="mb-0">Rapport de paie</h4>
 
                               </div>
                           </div>
@@ -27,6 +27,7 @@
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Bank</th>
+                                            <th>Paiement</th>
                                             <th>Montant</th>
                                             <th>Etat</th>
                                             <th>Date</th>
@@ -34,47 +35,35 @@
                                             <th style="width: 120px;">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td><a href="javascript: void(0);" class="text-dark fw-bold">1</a> </td>
-                                        <td>Albert Ein...</td>
-                                        <td>
-                                            -
-                                        </td>
-                                        <td>
-                                          -
-                                        </td>
-                                        <td>
-                                          <div class="badge bg-soft-success font-size-12">
-                                            Payé
-                                          </div>
-                                        </td>
-                                        <td>-</td>
-                                        <td style="width:200px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Lorem ipsum dolor sit...</td>
-
-                                        <td>
-                                            <button type="button" data-bs-toggle="modal" data-bs-target=".salaireModal" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
-                                        </td>
-                                    </tr>
-                                       <% Array(24).fill(null).forEach((el, index) => { %>
+                                    <tbody
+                                       <% data.forEach((el, index) => { %>
                                         <tr>
-                                          <td><a href="javascript: void(0);" class="text-dark fw-bold"><%=index + 2%></a> </td>
-                                          <td>Luccin Mas...</td>
+                                          <td><a href="javascript: void(0);" class="text-dark fw-bold"><%=index + 1%></a> </td>
+                                          <td><%=(el.name).substring(0,15)%>...</td>
                                           <td>
-                                              Ecobank
+                                              <%=el.bank%>
                                           </td>
                                           <td>
-                                            $141
-                                          </td>
-                                          <td>
-                                            <div class="badge bg-soft-danger font-size-12">
-                                              Pas payé
+                                            <div class="badge bg-soft-primary">
+                                              <%=el.fond.substring(0,15)%>...
                                             </div>
                                           </td>
-                                          <td>13 Mai, 2021</td>
-                                          <td style="width:200px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Lorem ipsum dolor sit...</td>
-
                                           <td>
+                                            <%=el.montant ? `${el.montant}$` : '-'%>
+                                          </td>
+                                          <td>
+                                            <div class="badge bg-soft-<%=el.payment === 'Non' ? 'danger':'success'%> font-size-12"><%=el.payment === 'Non' ? 'Pas payé':'Payé'%> </div>
+                                          </td>
+                                          <td><%=el.date%></td>
+                                          <td>
+                                            <% if (el.comment) { %>
+                                              <%=(el.comment).substring(0,15)%>...
+                                             <% }else{ %>
+                                               -
+                                             <% } %>
+                                          </td>
+                                          <td>
+                                              <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                               <button type="button" data-bs-toggle="modal" data-bs-target=".salaireModal" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
                                       </tr>
@@ -97,7 +86,6 @@
               </div>
               <!-- End Page-content -->
 
-              <% console.log('data', data) %>
 
              <!-- Footer-->
              <%- include('./footer.ejs') %>

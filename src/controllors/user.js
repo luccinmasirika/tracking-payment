@@ -92,7 +92,8 @@ exports.updatePassword = async (req, res) => {
 // Remove user
 exports.remove = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.body.user });
+  const data = req.user
+    const user = await User.findOne({ _id: data._id });
     user.remove((err, _data) => {
       if (err) {
         return res.status(400).json({

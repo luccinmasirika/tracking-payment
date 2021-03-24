@@ -12,7 +12,7 @@ const {
 router.get('/user', readUser);
 router.get('/users', readAllUsers);
 router.put('/user', updateUser);
-router.delete('/user', remove);
+router.delete('/user/:userId', remove);
 
 router.param('userId', getUserByID);
 

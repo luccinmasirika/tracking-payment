@@ -1,6 +1,6 @@
 <!--  Extra Large modal example -->
 <div
-  class="modal fade perdiemsModal"
+  class="modal fade preview"
   tabindex="-1"
   role="dialog"
   aria-labelledby="myExtraLargeModalLabel"
@@ -10,7 +10,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">
-          Paiement de perdiems
+          Autres Paiements
         </h5>
         <button
           type="button"
@@ -26,24 +26,12 @@
               <div class="card-body">
                 <div class="invoice-title">
                   <h4 class="float-end font-size-16">
-                    Etat
-                    <span class="badge bg-success font-size-12 ms-2">Payé</span>
+                    Type de paiement
+                    <span class="badge bg-success font-size-12 ms-2"
+                      >Paiement salaire</span
+                    >
                   </h4>
-                  <div class="mb-4">
-                    <img
-                      src="/assets/images/logo-dark.png"
-                      alt="logo"
-                      height="20"
-                    />
-                  </div>
-                  <div class="text-muted">
-                    <p class="mb-1">Q. Le Volcan, 007</p>
-                    <p class="mb-1">
-                      <i class="uil uil-envelope-alt me-1"></i>
-                      luccinmasirika@gmail.com
-                    </p>
-                    <p><i class="uil uil-phone me-1"></i>+243 993 936 859</p>
-                  </div>
+                  <%- include('./entete.ejs') %>
                 </div>
 
                 <hr class="my-4" />
@@ -52,12 +40,12 @@
                   <div class="col-sm-6">
                     <div class="text-muted">
                       <div>
-                        <h5 class="font-size-16 mb-1">Nom de l'agent:</h5>
-                        <p>Luccin Masirika</p>
+                        <h5 class="font-size-16 mb-1">Nom du bénéficiaire:</h5>
+                        <p id="agent">Luccin Masirika</p>
                       </div>
                       <div class="mt-4">
-                        <h5 class="font-size-16 mb-1">Bank:</h5>
-                        <p>TMB</p>
+                        <h5 class="font-size-16 mb-1">Province:</h5>
+                        <p id="province">Kinshasa</p>
                       </div>
                     </div>
                   </div>
@@ -65,11 +53,15 @@
                     <div class="text-muted text-sm-end">
                       <div>
                         <h5 class="font-size-16 mb-1">Montant:</h5>
-                        <p>504$</p>
+                        <span
+                          id="montantDetail"
+                          class="badge bg-primary font-size-12 ms-2"
+                          >100$</span
+                        >
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-16 mb-1">Date de paiement:</h5>
-                        <p>09 Jul, 2020</p>
+                        <p id="date">09 Jul, 2020</p>
                       </div>
                     </div>
                   </div>
@@ -87,21 +79,11 @@
                     fugit maxime soluta velit odit et quisquam vel non, magni
                     consequatur cum quod voluptatum consequuntur harum nulla
                     nihil similique inventore saepe officiis, pariatur, odio a
-                    alias impedit aliquid? Eligendi, ipsa? Debitis rerum quasi
-                    minima? Dignissimos rem, nisi animi molestias consectetur
-                    neque vel expedita quam, quia ducimus magnam facilis
-                    nesciunt tempore, excepturi ipsa iusto accusamus impedit.
-                    Illum odio libero quo, beatae officia iure, ea ullam
-                    repudiandae vero aut corporis dignissimos harum sequi
-                    accusantium hic ut quisquam aliquam asperiores quasi dolor
-                    mollitia blanditiis. Eum provident debitis quasi excepturi.
-                    Laborum, voluptas possimus.
+                    alias impedit aliquid?
                   </p>
                 </div>
 
                 <hr class="my-4" />
-
-                <em style="text-align: center">Votre pied de page sera ici</em>
               </div>
             </div>
           </div>

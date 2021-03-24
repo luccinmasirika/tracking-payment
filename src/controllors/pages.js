@@ -256,13 +256,13 @@ exports.listAutres = (req, res) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      read(`paiements`).then((data) => {
-        if (data.error) {
-          req.flash('Error', `${data.error}`);
+      read(`paiements`).then((data2) => {
+        if (data2.error) {
+          req.flash('Error', `${data2.error}`);
         }
-        read(`fonctionnaires`).then((data2) => {
-          if (data2.error) {
-            req.flash('Error', `${data2.error}`);
+        read(`fonctionnaires`).then((data3) => {
+          if (data3.error) {
+            req.flash('Error', `${data3.error}`);
           }
 
           const api = config.server.api;
@@ -296,7 +296,13 @@ exports.listAutres = (req, res) => {
             'Tshopo',
             'Tshuapa',
           ];
-          res.render('pages/admin', { path, provinces, data, api, data2 });
+          res.render('pages/admin', {
+            path,
+            provinces,
+            data,
+            api,
+            data2: [...data2, ...data3],
+          });
         });
       });
     });

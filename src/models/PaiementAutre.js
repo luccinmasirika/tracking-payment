@@ -7,9 +7,10 @@ const cartographeSchema = new mongoose.Schema(
     refference: { type: String, trim: true, required: true },
     libelle: { type: String, trim: true, required: true },
     agent: { type: String, trim: true, required: true },
+    agent: { type: String, trim: true, required: true },
     province: { type: String, trim: true, required: true },
     date: { type: String, trim: true, required: true },
-    description: { type: String, trim: true, required: true }
+    description: { type: String, trim: true, default: '' },
   },
   { timestamps: true }
 );
