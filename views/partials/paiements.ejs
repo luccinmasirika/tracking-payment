@@ -37,16 +37,30 @@
                                     </div>
                                     <%}%>
 
+                                    <div
+                                      class="alert alert-success alert-dismissible fade show hidden"
+                                      role="alert"
+                                      id="alert"
+                                    >
+                                      <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"
+                                      ></button>
+                                      <strong>Updated with success !</strong>
+                                    </div>
+
                                     <h4 class="card-title">Ajouter un type de paiement</h4>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ipsam voluptate sunt cum nam. Voluptatibus excepturi veniam accusantium vel sit?</p>
                                     <div class="mb-3 row"></div>
-                                    <form action="/create/paiement" method="post">
+                                    <form id="add">
 
                                   <!-- Paiements -->
                                     <div class="mb-3 row">
                                       <label for="example-text-input" class="col-md-2 col-form-label">Paiements</label>
                                       <div class="col-md-10">
-                                          <input class="form-control" name="payment" type="text" placeholder="Salaire (Phase 2)" id="example-text-input">
+                                          <input class="form-control" name="payment" type="text" id="payment1" placeholder="Salaire (Phase 2)" >
                                       </div>
                                   </div>
 
@@ -54,7 +68,7 @@
                                   <div class="mb-3 row">
                                     <label for="example-text-input" class="col-md-2 col-form-label">Description</label>
                                     <div class="col-md-10">
-                                        <input class="form-control" name="description" type="text" placeholder="Frais de deplacement" id="example-text-input">
+                                        <input class="form-control" name="description" id="description1" type="text" placeholder="Frais de deplacement" >
                                     </div>
                                 </div>
 
@@ -62,7 +76,7 @@
                                 <div class="mb-3 row">
                                   <label for="example-text-input" class="col-md-2 col-form-label">Montant</label>
                                   <div class="col-md-10">
-                                      <input class="form-control" name="montant" type="number" placeholder="450 000$" id="example-text-input">
+                                      <input class="form-control" name="montant" id="montant1" type="number" placeholder="450 000$" >
                                   </div>
                               </div>
 
@@ -87,7 +101,7 @@
                               <h4 class="card-title">Type de paiement actuel</h4>
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 
-                              <div class="table-responsive">
+                              <div class="table-responsive" id="refresh">
                                   <table class="table table-striped mb-0">
                                       <thead>
                                           <tr>
@@ -106,9 +120,9 @@
                                               <td><%=el.description%></td>
                                               <td><%=el.montant%>$</td>
                                               <td class="action">
-                                                <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              </td>
+                                                <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
+                                                <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
+                                          </td>
                                           </tr>
                                           <% }) %>
                                   </tbody>
@@ -128,9 +142,8 @@
               </div>
               <!-- End Page-content -->
 
-
-
              <!-- Footer-->
+             <%- include('./editPaiement.ejs') %>
              <%- include('./footer.ejs') %>
           </div>
           <!-- end main content-->
@@ -148,3 +161,92 @@
       <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
 
        <script src="/assets/js/app.js"></script>
+
+       <script>
+        // CREATE ELEMENT
+        $(document).ready(function () {
+         $("#add").submit(function (event) {
+                   var formData = {
+                    payment: $("#payment1").val(),
+                    description: $("#description1").val(),
+                    montant: $("#montant1").val()
+                   };
+
+                   $('#noLoader').addClass('hidder')
+                   $('#loader').removeClass('hidder')
+
+                   $.ajax({
+                   type: "POST",
+                   url: "/paiement/create",
+                   data: formData,
+                   dataType: "json",
+                   encode: true,
+                   }).done(function (data) {
+                       console.log(data)
+                       $('#alert').removeClass('hidden')
+                       $('#loader').addClass('hidder')
+                       $('#noLoader').removeClass('hidder')
+                       $('#refresh').load(document.URL +  ' #refresh');
+                   });
+
+                   event.preventDefault();
+               });
+
+        });
+
+      </script>
+
+      <script>
+       $(document).ready(function () {
+
+         // GET BY ID CLICK
+         $('body').on('click', '.update',function(){
+             const id =  $(this).attr('data-id');
+             const API = $(this).attr('data-api');
+
+             //GET ELEMENTS
+             $.get(`${API.trim()}/paiement/${id}`, function(data, status){
+               document.getElementById("payment").value =  data.payment;
+               document.getElementById("description").value =  data.description;
+               document.getElementById("montant").value =  data.montant;
+
+               //UPDATE ELEMENTS
+               $("#form").submit(function (event) {
+                 var formData = {
+                    payment: $("#payment").val(),
+                    description: $("#description").val(),
+                    montant: $("#montant").val()
+                   };
+
+                   $('#noLoader2').addClass('hidder')
+                   $('#loader2').removeClass('hidder')
+
+                   $.ajax({
+                   type: "POST",
+                   url: `${API.trim()}/paiement/${id}?_method=PUT`,
+                   data: formData,
+                   dataType: "json",
+                   encode: true,
+                   }).done(function (data) {
+                       $('#update').removeClass('hidden')
+                       $('#refresh').load(document.URL +  ' #refresh');
+                   });
+
+                   event.preventDefault();
+               });
+
+             });
+             });
+
+             //DELETE FORM
+             $('body').on('click', '.remove',function(){
+               const id =  $(this).attr('data-id');
+               const API = $(this).attr('data-api');
+             $.post(`${API.trim()}/paiement/${id}?_method=DELETE`, function(data, status){
+              $('#alert').removeClass('hidden')
+               $('#refresh').load(document.URL +  ' #refresh');
+             });
+             });
+
+       });
+       </script>

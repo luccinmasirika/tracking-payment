@@ -105,7 +105,7 @@ exports.createFonctionnaire = async (req, res) => {
       res.redirect('/admin/add-fonctionnaire');
     });
   } catch (err) {
-    console.log(err);
+    req.flash('Error', `${err}`);
     res.redirect('/admin/add-fonctionnaire');
   }
 };
@@ -177,7 +177,7 @@ exports.createForm = async (req, res) => {
       console.log('data', data);
     });
   } catch (err) {
-    console.log(err);
+    req.flash('Error', `${err}`);
     res.redirect('/');
   }
 };

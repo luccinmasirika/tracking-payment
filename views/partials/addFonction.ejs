@@ -40,7 +40,7 @@
                                     <%}%>
 
                                     <div
-                                          class="alert alert-success alert-dismissible fade"
+                                          class="alert alert-success alert-dismissible fade hidden"
                                           role="alert"
                                           id="alert"
                                         >
@@ -63,7 +63,7 @@
                                 <div class="mb-3 row">
                                   <label for="example-text-input" class="col-md-2 col-form-label">Fonction</label>
                                   <div class="col-md-10">
-                                      <input class="form-control" name="name" type="text" placeholder="Gestionnaire" id="name">
+                                      <input class="form-control" name="name" type="text" placeholder="Gestionnaire" id="name1">
                                   </div>
                               </div>
 
@@ -153,7 +153,7 @@
          $(document).ready(function () {
           $("#add").submit(function (event) {
                     var formData = {
-                        name: $("#name").val()
+                        name: $("#name1 ").val()
                     };
 
                     $.ajax({
@@ -164,7 +164,7 @@
                     encode: true,
                     }).done(function (data) {
                         console.log(data)
-                        $('#alert').addClass('show')
+                        $('#alert').removeClass('hidden')
                         $('#refresh').load(document.URL +  ' #refresh');
                     });
 
@@ -200,7 +200,7 @@
                     dataType: "json",
                     encode: true,
                     }).done(function (data) {
-                        $('#alert').addClass('show')
+                        $('#update').removeClass('hidden')
                         $('#refresh').load(document.URL +  ' #refresh');
                     });
 

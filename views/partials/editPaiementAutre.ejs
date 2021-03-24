@@ -1,0 +1,190 @@
+<!--  Extra Large modal example -->
+<div
+  class="modal fade edit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">
+          Edit paiement
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12" style="padding: 10px 40px">
+            <div
+              class="alert alert-success alert-dismissible fade show hidden"
+              role="alert"
+              id="update"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+              <strong>Updated with success !</strong>
+            </div>
+
+            <form id="form">
+              <div class="row">
+                <div class="col-lg-12">
+                  <!-- Type de paiement -->
+                  <div class="mb-3">
+                    <label class="form-label">Selectionnez de paiement</label>
+                    <select class="form-control select2" name="payment">
+                      <option>Cliquer pour selectionner</option>
+                      <% data.forEach(el => { %>
+                      <option value="<%=el.payment%>"><%=el.payment%></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <!-- Montant-->
+                  <div class="mb-3" id="montant">
+                    <label class="form-label">Montant du paiement</label>
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                      </div>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="montant"
+                        id="inlineFormInputGroup"
+                        placeholder="Montant"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Refference -->
+                  <div class="mb-3">
+                    <label class="form-label" for="default-input"
+                      >Réfference de paiement</label
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="default-input"
+                      name="refference"
+                      placeholder="Réfference"
+                    />
+                  </div>
+
+                  <!-- Libele -->
+                  <div class="mb-3">
+                    <label class="form-label" for="default-input"
+                      >Libellé de paiement</label
+                    >
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="default-input"
+                      name="libelle"
+                      placeholder="Libellé"
+                    />
+                  </div>
+
+                  <!--List Agent -->
+                  <div class="mb-3">
+                    <label class="form-label">Bénéficiaire</label>
+                    <select class="form-control select2" name="agent">
+                      <option>Cliquer pour selectionner un agent</option>
+                      <% data2.forEach(el => { %>
+                      <option value="<%=el.firstName%> <%=el.lastName%>">
+                        <%=el.firstName%> <%=el.lastName%>
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <!-- Province -->
+                  <div class="mb-3">
+                    <label class="form-label">Selectionnez la province</label>
+                    <select class="form-control select2" name="province">
+                      <option>Cliquer pour selectionner</option>
+                      <% provinces.forEach(element => { %>
+                      <option value="<%=element%>"><%=element%></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <!-- Date-->
+                  <div class="mb-3" id="date">
+                    <label class="form-label">Date de paiement</label>
+                    <div class="input-group" id="datepicker2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="dd M, yyyy"
+                        data-date-format="dd M, yyyy"
+                        data-date-container="#datepicker2"
+                        data-provide="datepicker"
+                        name="date"
+                        data-date-autoclose="true"
+                      />
+
+                      <span class="input-group-text"
+                        ><i class="mdi mdi-calendar"></i
+                      ></span>
+                    </div>
+                    <!-- input-group -->
+                  </div>
+
+                  <!-- Description -->
+                  <div class="mb-3">
+                    <label class="form-label" for="default-input"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      rows="3"
+                      name="description"
+                      placeholder="Description"
+                    ></textarea>
+                  </div>
+
+                  <!-- Submit-->
+                  <div class="mb-3">
+                    <button
+                      type="submit"
+                      class="btn btn-primary waves-effect waves-light"
+                    >
+                      Submit <i class="uil uil-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- JAVASCRIPT -->
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="/assets/libs/node-waves/waves.min.js"></script>
+<script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+<script src="/assets/js/app.js"></script>

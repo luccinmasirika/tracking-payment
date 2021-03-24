@@ -40,7 +40,7 @@
                                     <%}%>
 
                                     <div
-                                          class="alert alert-success alert-dismissible fade"
+                                          class="alert alert-dismissible alert-success fade"
                                           role="alert"
                                           id="alert"
                                         >
@@ -63,7 +63,7 @@
                                     <div class="mb-3 row">
                                       <label for="example-text-input" class="col-md-2 col-form-label">First Name</label>
                                       <div class="col-md-10">
-                                          <input class="form-control" name="firstName" type="text" placeholder="Luccin" id="example-text-input">
+                                          <input class="form-control" name="firstName" id="firstName1" type="text" placeholder="Luccin" required>
                                       </div>
                                     </div>
 
@@ -71,7 +71,7 @@
                                   <div class="mb-3 row">
                                     <label for="example-text-input" class="col-md-2 col-form-label">Last Name</label>
                                     <div class="col-md-10">
-                                        <input class="form-control" name="lastName" type="text" placeholder="Masirika" id="example-text-input">
+                                        <input class="form-control" name="lastName" id="lastName1" type="text" placeholder="Masirika" required>
                                     </div>
                                 </div>
 
@@ -79,8 +79,8 @@
                                 <div class="mb-3 row">
                                   <label for="example-text-input" class="col-md-2 col-form-label">Fonction</label>
                                   <div class="col-md-10">
-                                    <select class="form-control select2" name="fonction">
-                                      <option>Selectionnez une fonction</option>
+                                    <select class="form-control select2" name="fonction" id="fonction1" required>
+                                      <option value="">Selectionnez une fonction</option>
                                       <% data2.forEach(el2 => { %>
                                         <option value="<%=el2.name%>"><%=el2.name%></option>
                                       <% }) %>
@@ -92,9 +92,14 @@
                               <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-2 col-form-label"></label>
                                 <div class="col-md-10">
-                                  <button type="submit" class="btn btn-primary w-md">Submit <i class="uil uil-arrow-right ms-2"></i></button>
+                                  <button type="submit" class="btn btn-primary w-md" id="noLoader">Submit <i class="uil uil-arrow-right ms-2"></i></button>
+                                  <button class="btn btn-primary hidden" type="button"  id="loader" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                  </button>
                                 </div>
                             </div>
+
                           </form>
                           </div>
                         </div>
@@ -111,7 +116,7 @@
                               <h4 class="card-title">Liste de fonctionnaires</h4>
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 
-                              <div class="table-responsive">
+                              <div class="table-responsive" id="refresh">
                                   <table class="table table-striped mb-0">
                                       <thead>
                                           <tr>
@@ -132,7 +137,7 @@
                                               <td class="action">
                                                 <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
                                                 <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
-                                          </td>
+                                              </td>
                                           </tr>
                                           <% }) %>
                                       </tbody>
@@ -190,10 +195,13 @@
          $(document).ready(function () {
           $("#add").submit(function (event) {
                     var formData = {
-                        firstName: $("#firstName").val(),
-                        lastName: $("#lastName").val(),
-                        fonction: $("#fonction").val()
+                        firstName: $("#firstName1").val(),
+                        lastName: $("#lastName1").val(),
+                        fonction: $("#fonction1").val()
                     };
+
+                    $('#noLoader').addClass('hidder')
+                    $('#loader').removeClass('hidder')
 
                     $.ajax({
                     type: "POST",
@@ -204,6 +212,8 @@
                     }).done(function (data) {
                         console.log(data)
                         $('#alert').addClass('show')
+                        $('#loader').addClass('hidder')
+                        $('#noLoader').removeClass('hidder')
                         $('#refresh').load(document.URL +  ' #refresh');
                     });
 
@@ -226,7 +236,7 @@
               $.get(`${API.trim()}/fonctionnaire/${id}`, function(data, status){
                 document.getElementById("firstName").value = data.firstName;
                 document.getElementById("lastName").value = data.lastName;
-                document.getElementById("fonction").value = data.fonction;
+                document.getElementById("selected").value = data.fonction;
 
                 //UPDATE ELEMENTS
                 $("#form").submit(function (event) {
@@ -236,6 +246,9 @@
                         fonction: $("#fonction").val()
                     };
 
+                    $('#noLoader2').addClass('hidder')
+                    $('#loader2').removeClass('hidder')
+
                     $.ajax({
                     type: "POST",
                     url: `${API.trim()}/fonctionnaire/${id}?_method=PUT`,
@@ -243,7 +256,7 @@
                     dataType: "json",
                     encode: true,
                     }).done(function (data) {
-                        $('#alert').addClass('show')
+                        $('#update').removeClass('hidden')
                         $('#refresh').load(document.URL +  ' #refresh');
                     });
 
@@ -255,11 +268,11 @@
 
               //DELETE FORM
               $('body').on('click', '.remove',function(){
-              const id =  $(this).attr('data-id');
-              const API = $(this).attr('data-api');
+                $('.alert').alert()
+                const id =  $(this).attr('data-id');
+                const API = $(this).attr('data-api');
               $.post(`${API.trim()}/fonctionnaire/${id}?_method=DELETE`, function(data, status){
-                console.log(data)
-                $('#alert').addClass('show')
+                $('#alert').addClass('show');
                 $('#refresh').load(document.URL +  ' #refresh');
               });
               });

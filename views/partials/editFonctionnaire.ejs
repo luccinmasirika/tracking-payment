@@ -1,12 +1,12 @@
 <!--  Extra Large modal example -->
 <div
-  class="modal fade editCartographe"
+  class="modal fade edit"
   tabindex="-1"
   role="dialog"
   aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-xl modal-dialog-centered">
+  <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">
@@ -48,6 +48,7 @@
                     placeholder="Luccin"
                     name="firstName"
                     id="firstName"
+                    required
                   />
                 </div>
               </div>
@@ -63,6 +64,7 @@
                     type="text"
                     placeholder="Masirika"
                     id="lastName"
+                    required
                   />
                 </div>
               </div>
@@ -73,13 +75,20 @@
                   >Fonction</label
                 >
                 <div class="col-md-10">
-                  <input
-                    class="form-control"
+                  <select
+                    class="form-control select2"
                     name="fonction"
-                    type="email"
-                    placeholder="Fonction"
                     id="fonction"
-                  />
+                    style="width: 100%"
+                    required
+                  >
+                    <option value="" id="selected">
+                      Cliquer pour selectionner
+                    </option>
+                    <% data2.forEach(el3 => { %>
+                    <option value="<%=el3.name%>"><%=el3.name%></option>
+                    <% }) %>
+                  </select>
                 </div>
               </div>
 
@@ -90,8 +99,25 @@
                   class="col-md-2 col-form-label"
                 ></label>
                 <div class="col-md-10">
-                  <button type="submit" class="btn btn-primary w-md">
+                  <button
+                    type="submit"
+                    id="noLoader2"
+                    class="btn btn-primary w-md"
+                  >
                     Submit
+                  </button>
+                  <button
+                    class="btn btn-primary hidden"
+                    type="button"
+                    id="loader2"
+                    disabled
+                  >
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
                   </button>
                 </div>
               </div>

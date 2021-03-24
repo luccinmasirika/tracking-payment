@@ -66,9 +66,9 @@
                                           <td><%=el.date%></td>
 
                                           <td>
-                                              <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              <button type="button" data-bs-toggle="modal" data-bs-target=".instructionPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                            <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
+                                            <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target=".instructionPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
                                           <td><%=el.libelle%></td>
                                           <td><%=el.province%></td>
@@ -92,6 +92,7 @@
 
 
              <!-- Footer-->
+             <%- include('./editPaiementAutre.ejs') %>
              <%- include('./footer.ejs') %>
           </div>
           <!-- end main content-->
@@ -123,3 +124,66 @@
       <script src="/assets/js/pages/ecommerce-datatables.init.js"></script>
 
       <script src="/assets/js/app.js"></script>
+
+      <script>
+       $(document).ready(function () {
+
+         // GET BY ID CLICK
+         $('body').on('click', '.update',function(){
+             const id =  $(this).attr('data-id');
+             const API = $(this).attr('data-api');
+
+             //GET ELEMENTS
+             $.get(`${API.trim()}/paiement-autres/${id}`, function(data, status){
+               document.getElementById("payment").value =  data.payment;
+               document.getElementById("montant").value =  data.montant;
+               document.getElementById("firstName").value =  data.firstName;
+               document.getElementById("refference").value =  data.refference;
+               document.getElementById("date").value =  data.date;
+               document.getElementById("libelle").value =  data.libelle;
+               document.getElementById("province").value =  data.province;
+               document.getElementById("description").value =  data.description;
+
+               //UPDATE ELEMENTS
+               $("#form").submit(function (event) {
+                 var formData = {
+                    payment: $("#payment").val(),
+                    montant: $("#montant").val(),
+                    firstName: $("#firstName").val(),
+                    refference: $("#refference").val(),
+                    date: $("#date").val(),
+                    libelle: $("#libelle").val(),
+                    province: $("#province").val(),
+                    description: $("#description").val(),
+                   };
+
+                   $.ajax({
+                   type: "POST",
+                   url: `${API.trim()}/paiement-autres/${id}?_method=PUT`,
+                   data: formData,
+                   dataType: "json",
+                   encode: true,
+                   }).done(function (data) {
+                       $('#update').removeClass('hidden')
+                       $('#refresh').load(document.URL +  ' #refresh');
+                   });
+
+                   event.preventDefault();
+               });
+
+             });
+             });
+
+             //DELETE FORM
+             $('body').on('click', '.remove',function(){
+               const id =  $(this).attr('data-id');
+               const API = $(this).attr('data-api');
+             $.post(`${API.trim()}/paiement-autres/${id}?_method=DELETE`, function(data, status){
+              $('#alert').removeClass('hidden')
+               $('#refresh').load(document.URL +  ' #refresh');
+             });
+             });
+
+       });
+       </script>
+

@@ -6,12 +6,13 @@
   aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-md modal-dialog-centered">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">
-          Edit fonction
+          Edit paiement
         </h5>
+
         <button
           type="button"
           class="btn-close"
@@ -35,19 +36,49 @@
               ></button>
               <strong>Updated with success !</strong>
             </div>
+
             <form id="form">
-              <!-- First Name -->
+              <!-- Paiements -->
               <div class="mb-3 row">
                 <label for="example-text-input" class="col-md-2 col-form-label"
-                  >Fonction</label
+                  >Paiements</label
                 >
                 <div class="col-md-10">
                   <input
                     class="form-control"
+                    name="payment"
                     type="text"
-                    name="name"
-                    id="name"
-                    required
+                    id="payment"
+                  />
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3 row">
+                <label for="example-text-input" class="col-md-2 col-form-label"
+                  >Description</label
+                >
+                <div class="col-md-10">
+                  <input
+                    class="form-control"
+                    name="description"
+                    id="description"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <!-- Montant -->
+              <div class="mb-3 row">
+                <label for="example-text-input" class="col-md-2 col-form-label"
+                  >Montant</label
+                >
+                <div class="col-md-10">
+                  <input
+                    class="form-control"
+                    name="montant"
+                    id="montant"
+                    type="number"
                   />
                 </div>
               </div>
@@ -60,7 +91,7 @@
                 ></label>
                 <div class="col-md-10">
                   <button type="submit" class="btn btn-primary w-md">
-                    Submit
+                    Submit <i class="uil uil-arrow-right ms-2"></i>
                   </button>
                 </div>
               </div>

@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
   const fonctionnaire = new Fonctionnaire(req.body);
   fonctionnaire.save((error, fonctionnaire) => {
     if (error) {
-      return res.status(400).json({ error: 'Something went wrong' });
+      return res.status(400).json({ error: 'Something went wrong' + error });
     }
     res.json(fonctionnaire);
   });
