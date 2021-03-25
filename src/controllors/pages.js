@@ -180,9 +180,14 @@ exports.listInstructions = (req, res) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      const path = 'listInstruction';
-      const api = config.server.api;
-      res.render('pages/admin', { path, data, api });
+      read(`instructions`).then((data) => {
+        if (data.error) {
+          req.flash('Error', `${data.error}`);
+        }
+        const path = 'listInstruction';
+        const api = config.server.api;
+        res.render('pages/admin', { path, data, api });
+      });
     });
   } catch (err) {
     req.flash('Error', `${err}`);

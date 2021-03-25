@@ -37,7 +37,21 @@
                             </div>
                             <%}%>
 
-                            <div class="table-responsive mb-4">
+                            <div
+                                          class="alert alert-success alert-dismissible fade show hidden"
+                                          role="alert"
+                                          id="alert"
+                                        >
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"
+                                          ></button>
+                                          <strong>Deleted !</strong>
+                                        </div>
+
+                            <div class="table-responsive mb-4" id="refresh">
                                 <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
                                             <th>#</th>
@@ -54,7 +68,7 @@
 
                                        <% data.forEach((el, index) => { %>
                                         <tr>
-                                          <td><a href="javascript: void(0);" class="text-dark fw-bold">IL0<%=index + 1 %> </a> </td>
+                                          <td><a href="javascript: void(0);" class="text-dark fw-bold"><%=index + 1 %> </a> </td>
                                           <td>
                                               <%=el.date%>
                                           </td>
@@ -70,9 +84,8 @@
                                           <td><%=(el.agent).substring(0,30)%>...</td>
 
                                           <td>
-                                              <a href="javascript:void(0);" class="px-3 text-primary"><i class="uil uil-pen font-size-18"></i></a>
-                                              <a href="javascript:void(0);" class="px-3 text-danger"><i class="uil uil-trash-alt font-size-18"></i></a>
-                                              <button type="button" data-bs-toggle="modal" data-bs-target=".instructionPaid" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                            <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%>" style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target=".instructionNoPaid" data-api="<%=api%>"  data-id="<%=el._id%>" class="btn btn-primary update btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
                                       </tr>
                                        <% }) %>
@@ -82,10 +95,12 @@
                         </div>
                     </div>
 
+
                       <!-- End Instruction list-->
 
                       <%- include('./instructionNopaid.ejs') %>
                       <%- include('./instructionPaid.ejs') %>
+                      <%- include('./validateInstuction.ejs') %>
 
                   </div>
                   <!-- end row -->
@@ -125,4 +140,112 @@
       <!-- init js -->
       <script src="/assets/js/pages/ecommerce-datatables.init.js"></script>
 
+
+      <!-- plugins -->
+      <script src="/assets/libs/select2/js/select2.min.js"></script>
+      <script src="/assets/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+      <script src="/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+      <script src="/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+      <script src="/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+      <script src="/assets/libs/%40chenfengyuan/datepicker/datepicker.min.js"></script>
+
+      <!-- init js -->
+      <script src="/assets/js/pages/form-advanced.init.js"></script>
+
       <script src="/assets/js/app.js"></script>
+
+      <script>
+        $(document).ready(function () {
+
+          // GET BY ID CLICK
+          $('body').on('click', '.update',function(){
+              const id =  $(this).attr('data-id');
+              const API = $(this).attr('data-api');
+
+
+              //GET ELEMENTS
+              $.get(`${API.trim()}/instruction/${id}`, function(data, status){
+                document.getElementById("date").innerText =  data.date || '--';
+                document.getElementById("montant").innerText =  data.montant || '--';
+                document.getElementById("nameAgent").innerText =  data.agent || '--';
+                document.getElementById("libelle").innerText =  data.libelle || '--';
+                document.getElementById("myText").innerText =  data.description || '--';
+                document.getElementById("refference").innerText =  data.refference || '--';
+                document.getElementById("date2").innerText =  data.date2 || '--';
+
+                if(data.payment==="Oui") {
+                  $('#Oui').removeClass('hidden')
+                  $('#validBtn').addClass('hidden')
+                }else{
+                  $('#No').removeClass('hidden')
+                }
+
+                $('.instructionNoPaid').on('hide.bs.modal', function (e) {
+                  $('#Oui').addClass('hidden')
+                  $('#validBtn').removeClass('hidden')
+                  $('#No').addClass('hidden')
+                })
+
+                console.log('test', data)
+
+                //UPDATE ELEMENTS
+                $("#form").submit(function (event) {
+                  var formData = {
+                    date: $("#date").val(),
+                    montant: $("#montant").val(),
+                    payment: $("#payment").val(),
+                     agent: $("#agent").val(),
+                     refference: $("#refference").val(),
+                     libelle: $("#libelle").val(),
+                     description: $("#description").val(),
+                     date2: $("#date2").val(),
+                    };
+
+                    $.ajax({
+                    type: "POST",
+                    url: `${API.trim()}/instruction/${id}?_method=PUT`,
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                    }).done(function (data) {
+                        $('#update').removeClass('hidden')
+                        $('#refresh').load(document.URL +  ' #refresh');
+                    });
+
+                    event.preventDefault();
+                });
+
+                $("#validate").submit(function (event) {
+                  var formData = {
+                    payment: 'Oui',
+                    refference: $("#refferenceB").val(),
+                    date2: $("#date2B").val(),
+                    };
+
+                    $.ajax({
+                    type: "POST",
+                    url: `${API.trim()}/instruction/${id}?_method=PUT`,
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                    }).done(function (data) {
+                        $('#update').removeClass('hidden')
+                        $('#refresh').load(document.URL +  ' #refresh');
+                    });
+                      // event.preventDefault()
+                });
+
+              });
+              });
+
+              //DELETE FORM
+              $('body').on('click', '.remove',function(){
+                const id =  $(this).attr('data-id');
+                const API = $(this).attr('data-api');
+              $.post(`${API.trim()}/instruction/${id}?_method=DELETE`, function(data, status){
+               $('#alert').removeClass('hidden')
+                $('#refresh').load(document.URL +  ' #refresh');
+              });
+              });
+        });
+        </script>

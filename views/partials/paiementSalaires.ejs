@@ -64,7 +64,7 @@
                                           </td>
                                           <td>
                                               <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
-                                              <button type="button" data-bs-toggle="modal" data-bs-target=".salaireModal" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                              <button type="button" data-bs-toggle="modal" data-bs-target=".salaireModal" data-id="<%=el._id%>" data-api="<%=api%> "  class="btn btn-primary update btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
                                       </tr>
                                        <% }) %>
@@ -74,6 +74,7 @@
                             </div>
                         </div>
                     </div>
+
 
                       <!-- End Instruction list-->
 
@@ -119,3 +120,51 @@
       <script src="/assets/js/pages/ecommerce-datatables.init.js"></script>
 
       <script src="/assets/js/app.js"></script>
+
+
+      <script>
+        $(document).ready(function () {
+
+          // GET BY ID CLICK
+          $('body').on('click', '.update',function(){
+              const id =  $(this).attr('data-id');
+              const API = $(this).attr('data-api');
+
+
+              //GET ELEMENTS
+              $.get(`${API.trim()}/form/${id}`, function(data, status){
+                document.getElementById("nameAgent").innerText =  data.name || '--';
+                document.getElementById("bank").innerText =  data.bank || '--';
+                document.getElementById("fondPaiement").innerText =  data.fond || '--';
+                document.getElementById("date").innerText =  data.date || '--';
+                document.getElementById("montant").innerText =  data.montant || '--';
+                document.getElementById("comment").innerText =  data.comment || '--';
+
+                console.log('Data', data)
+
+                if(data.payment==="Oui") {
+                  $('#Oui').removeClass('hidden')
+                }else{
+                  $('#No').removeClass('hidden')
+                }
+
+                $('.salaireModal').on('hide.bs.modal', function (e) {
+                  $('#Oui').addClass('hidden')
+                  $('#No').addClass('hidden')
+                })
+
+              });
+
+              //DELETE FORM
+              $('body').on('click', '.remove',function(){
+                const id =  $(this).attr('data-id');
+                const API = $(this).attr('data-api');
+                $.post(`${API.trim()}/form/${id}?_method=DELETE`, function(data, status){
+                  $('#alert').removeClass('hidden')
+                    $('#refresh').load(document.URL +  ' #refresh');
+                   });
+                });
+              });
+
+        });
+        </script>

@@ -32,18 +32,13 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const fonctionnaire = req.fonctionnaire;
   try {
-    const { firstName, lastName, fonction } = req.body;
+    const update = req.body;
 
-    const data = await Fonctionnaire.findOne({ _id: fonctionnaire._id });
-
-    // Pass the request body to user and save new user data in database
-    Object.assign(data, {
-      firstName,
-      lastName,
-      fonction,
-    });
-
-    data.save();
+    const data = await Fonctionnaire.findByIdAndUpdate(
+      { _id: fonctionnaire._id },
+      update,
+      { new: true }
+    );
 
     res.json(data);
   } catch (err) {

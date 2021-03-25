@@ -27,8 +27,18 @@
                 <div class="invoice-title">
                   <h4 class="float-end font-size-16">
                     Etat
-                    <span class="badge bg-success font-size-12 ms-2">Payé</span>
+                    <span
+                      id="No"
+                      class="badge bg-danger hidden font-size-12 ms-2 refresh2"
+                      >Pas Payé</span
+                    >
+                    <span
+                      id="Oui"
+                      class="badge bg-success hidden font-size-12 ms-2 refresh2"
+                      >Payé</span
+                    >
                   </h4>
+
                   <%- include('./entete.ejs') %>
                 </div>
 
@@ -39,23 +49,32 @@
                     <div class="text-muted">
                       <div>
                         <h5 class="font-size-16 mb-1">Nom de l'agent:</h5>
-                        <p>Luccin Masirika</p>
+                        <p id="nameAgent">--</p>
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-16 mb-1">Bank:</h5>
-                        <p>TMB</p>
+                        <p id="bank">--</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="text-muted text-sm-end">
+                      <div class="mt-4">
+                        <h5 class="font-size-16 mb-1">Paiement:</h5>
+                        <p
+                          id="fondPaiement"
+                          class="badge bg-primary font-size-12 ms-2 refresh2"
+                        >
+                          --
+                        </p>
+                      </div>
                       <div>
                         <h5 class="font-size-16 mb-1">Montant:</h5>
-                        <p>504$</p>
+                        <p id="montant">--</p>
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-16 mb-1">Date de paiement:</h5>
-                        <p>09 Jul, 2020</p>
+                        <p id="date">--</p>
                       </div>
                     </div>
                   </div>
@@ -66,28 +85,15 @@
                 <div class="py-2">
                   <h5 class="font-size-15">Commentaire</h5>
 
-                  <p style="text-align-last: left; text-align: justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Perspiciatis non tempore asperiores, suscipit error sapiente
-                    ullam. Error, adipisci. Asperiores, voluptate deserunt. Ab
-                    fugit maxime soluta velit odit et quisquam vel non, magni
-                    consequatur cum quod voluptatum consequuntur harum nulla
-                    nihil similique inventore saepe officiis, pariatur, odio a
-                    alias impedit aliquid? Eligendi, ipsa? Debitis rerum quasi
-                    minima? Dignissimos rem, nisi animi molestias consectetur
-                    neque vel expedita quam, quia ducimus magnam facilis
-                    nesciunt tempore, excepturi ipsa iusto accusamus impedit.
-                    Illum odio libero quo, beatae officia iure, ea ullam
-                    repudiandae vero aut corporis dignissimos harum sequi
-                    accusantium hic ut quisquam aliquam asperiores quasi dolor
-                    mollitia blanditiis. Eum provident debitis quasi excepturi.
-                    Laborum, voluptas possimus.
+                  <p
+                    id="comment"
+                    style="text-align-last: left; text-align: justify"
+                  >
+                    --
                   </p>
                 </div>
 
                 <hr class="my-4" />
-
-                <em style="text-align: center">Votre pied de page sera ici</em>
               </div>
             </div>
           </div>
@@ -102,7 +108,10 @@
         >
           Close
         </button>
-        <button class="btn btn-success waves-effect waves-light me-1">
+        <button
+          class="btn btn-success waves-effect waves-light me-1"
+          onclick="window.print()"
+        >
           <i class="fa fa-print"></i>
         </button>
       </div>

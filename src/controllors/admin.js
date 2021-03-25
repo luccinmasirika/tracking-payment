@@ -128,6 +128,24 @@ exports.createInstruction = async (req, res) => {
   }
 };
 
+//CREATE INSTRUCTION
+exports.createInstruction = async (req, res) => {
+  try {
+    create(req.body, `instruction/create`).then((data) => {
+      if (data.error) {
+        req.flash('Error', `${data.error}`);
+        res.redirect('/admin/instructions');
+      }
+      console.log('test', data);
+      req.flash('Success', `Instruction letter added`);
+      res.redirect('/admin/instructions');
+    });
+  } catch (err) {
+    req.flash('Error', `${err}`);
+    res.redirect('/admin/instructions');
+  }
+};
+
 //CREATE PAIEMENT
 exports.createPaiement = async (req, res) => {
   try {
@@ -162,7 +180,6 @@ exports.createPaiementAutre = async (req, res) => {
     res.redirect('/admin/add-autres-paiements');
   }
 };
-
 
 //AUTRES PAIEMENT
 exports.updatePaiementAutre = async (req, res) => {

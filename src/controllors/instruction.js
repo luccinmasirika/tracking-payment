@@ -32,20 +32,9 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const instruction = req.instruction;
   try {
-    const { date, montant, agent, libelle, description } = req.body;
+    const update = req.body;
 
-    const data = await Instruction.findOne({ _id: instruction._id });
-
-    // Pass the request body to user and save new user data in database
-    Object.assign(instruction, {
-      date,
-      montant,
-      agent,
-      libelle,
-      description,
-    });
-
-    data.save();
+    const data = await Instruction.findByIdAndUpdate({ _id: instruction._id }, update , {new: true});
 
     res.json(data);
   } catch (err) {

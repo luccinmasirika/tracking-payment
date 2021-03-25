@@ -32,32 +32,12 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const cartographe = req.cartographe;
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      airtel,
-      airtelMoney,
-      vodacom,
-      mPesa,
-    } = req.body;
+    const update = req.body;
 
-    const data = await Cartographe.findOne({ _id: cartographe._id });
-
-    // Pass the request body to user and save new user data in database
-    Object.assign(data, {
-      firstName,
-      lastName,
-      email,
-      airtel,
-      airtelMoney,
-      vodacom,
-      mPesa,
-    });
-
-    data.save();
+    const data = await Cartographe.findByIdAndUpdate({ _id: cartographe._id }, update , {new: true});
 
     res.json(data);
+    
   } catch (err) {
     return res
       .status(400)

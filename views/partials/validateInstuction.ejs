@@ -1,0 +1,112 @@
+<!--  Extra Large modal example -->
+<div
+  class="modal fade valid"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myExtraLargeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div
+      class="modal-content"
+      style="box-shadow: 0 0 90px 0px rgb(0 0 0 / 10%)"
+    >
+      <div class="modal-header">
+        <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">
+          Validate instruction
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12" style="padding: 10px 40px">
+            <div
+              class="alert alert-success alert-dismissible fade show hidden"
+              role="alert"
+              id="update"
+            >
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+              <strong>Updated with success !</strong>
+            </div>
+            <form id="validate">
+              <!-- Date-->
+              <div class="mb-3 row">
+                <label class="col-md-12 col-form-label">Date de paiement</label>
+                <div class="col-md-12 input-group" id="datepicker2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="dd M, yyyy"
+                    data-date-format="dd M, yyyy"
+                    data-date-container="#datepicker2"
+                    data-provide="datepicker"
+                    id="date2B"
+                    name="date2"
+                    required
+                    data-date-autoclose="true"
+                  />
+
+                  <span class="input-group-text"
+                    ><i class="mdi mdi-calendar"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="mb-3 row">
+                <label for="example-text-input" class="col-md-12 col-form-label"
+                  >Refference de paiement</label
+                >
+                <div class="col-md-12">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="refference"
+                    id="refferenceB"
+                  />
+                </div>
+              </div>
+
+              <!-- Submit-->
+              <div class="mb-3 row">
+                <label
+                  for="example-text-input"
+                  class="col-md-2 col-form-label"
+                ></label>
+                <div class="col-md-10">
+                  <button type="submit" class="btn btn-primary w-md">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- JAVASCRIPT -->
+<script src="/assets/libs/jquery/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="/assets/libs/node-waves/waves.min.js"></script>
+<script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+
+<script src="/assets/js/app.js"></script>
