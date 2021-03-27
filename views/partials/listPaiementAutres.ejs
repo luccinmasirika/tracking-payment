@@ -83,8 +83,8 @@
                                           <td><%=el.libelle%></td>
                                           <td><%=el.province%></td>
                                           <td>
-                                            <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
-                                            <button type="button" data-bs-toggle="modal" data-bs-target=".preview" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
+                                            <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%>" style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
+                                            <button type="button" data-bs-toggle="modal" data-id="<%=el._id%>"  data-api="<%=api%>" data-bs-target=".preview" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light update">Preview <i class="fas fa-eye"></i></button>
                                           </td>
                                           <td><%=el.description%></td>
                                       </tr>
@@ -146,6 +146,7 @@
       <script src="/assets/js/app.js"></script>
 
 
+
       <script>
        $(document).ready(function () {
 
@@ -154,16 +155,20 @@
              const id =  $(this).attr('data-id');
              const API = $(this).attr('data-api');
 
+             console.log('ID', id)
+
              //GET ELEMENTS
              $.get(`${API.trim()}/paiement-autre/${id}`, function(data, status){
-               document.getElementById("payment").value =  data.payment;
+               document.getElementById("payment").innerText =  data.payment;
                document.getElementById("montant").innerText =  data.montant;
-               document.getElementById("agent").value =  data.agent;
-               document.getElementById("refference").value =  data.refference;
-               document.getElementById("date").value =  data.date;
-               document.getElementById("libelle").value =  data.libelle;
-               document.getElementById("province").value =  data.province;
-               document.getElementById("description").value =  data.description;
+               document.getElementById("agent").innerText =  data.agent;
+               document.getElementById("refference").innerText =  data.refference;
+               document.getElementById("date").innerText =  data.date;
+               document.getElementById("libelle").innerText =  data.libelle;
+               document.getElementById("province").innerText =  data.province;
+               document.getElementById("description").innerText =  data.description;
+
+               console.log('data', data)
 
                //UPDATE ELEMENTS
                $("#form").submit(function (event) {

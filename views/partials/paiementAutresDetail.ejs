@@ -27,8 +27,10 @@
                 <div class="invoice-title">
                   <h4 class="float-end font-size-16">
                     Type de paiement
-                    <span class="badge bg-success font-size-12 ms-2"
-                      >Paiement salaire</span
+                    <span
+                      id="payment"
+                      class="badge bg-success font-size-12 ms-2"
+                      >--</span
                     >
                   </h4>
                   <%- include('./entete.ejs') %>
@@ -41,11 +43,15 @@
                     <div class="text-muted">
                       <div>
                         <h5 class="font-size-16 mb-1">Nom du bénéficiaire:</h5>
-                        <p id="agent">Luccin Masirika</p>
+                        <p id="agent">--</p>
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-16 mb-1">Province:</h5>
-                        <p id="province">Kinshasa</p>
+                        <p id="province">--</p>
+                      </div>
+                      <div class="mt-4">
+                        <h5 class="font-size-16 mb-1">Refférence:</h5>
+                        <p id="refference">--</p>
                       </div>
                     </div>
                   </div>
@@ -56,12 +62,20 @@
                         <span
                           id="montantDetail"
                           class="badge bg-primary font-size-12 ms-2"
-                          >100$</span
+                          >--</span
+                        >
+                      </div>
+                      <div>
+                        <h5 class="font-size-16 mb-1">Montant:</h5>
+                        <span
+                          id="libelle"
+                          class="badge bg-secondary font-size-12 ms-2"
+                          >--</span
                         >
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-16 mb-1">Date de paiement:</h5>
-                        <p id="date">09 Jul, 2020</p>
+                        <p id="date">--</p>
                       </div>
                     </div>
                   </div>
@@ -72,14 +86,11 @@
                 <div class="py-2">
                   <h5 class="font-size-15">Commentaire</h5>
 
-                  <p style="text-align-last: left; text-align: justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Perspiciatis non tempore asperiores, suscipit error sapiente
-                    ullam. Error, adipisci. Asperiores, voluptate deserunt. Ab
-                    fugit maxime soluta velit odit et quisquam vel non, magni
-                    consequatur cum quod voluptatum consequuntur harum nulla
-                    nihil similique inventore saepe officiis, pariatur, odio a
-                    alias impedit aliquid?
+                  <p
+                    id="description"
+                    style="text-align-last: left; text-align: justify"
+                  >
+                    --
                   </p>
                 </div>
 
