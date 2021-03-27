@@ -15,7 +15,7 @@ router.post('/form/create', create);
 router.get('/form/:id', read);
 router.get('/forms', readAll);
 router.put('/form/:id', update);
-router.delete('/form/:id', remove);
+router.delete('/form/:id',requireSignin, remove);
 
 router.param('id', getByID);
 router.param('userId', getUserByID);

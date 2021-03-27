@@ -11,11 +11,11 @@ const {
   getByID,
 } = require('../controllors/paiementAutre');
 
-router.post('/paiement-autre/create', create);
+router.post('/paiement-autre/create', requireSignin, create);
 router.get('/paiement-autre/:id', read);
 router.get('/paiement-autres', readAll);
-router.put('/paiement-autre/:id', update);
-router.delete('/paiement-autre/:id', remove);
+router.put('/paiement-autre/:id', requireSignin, update);
+router.delete('/paiement-autre/:id', requireSignin, remove);
 
 router.param('id', getByID);
 router.param('userId', getUserByID);

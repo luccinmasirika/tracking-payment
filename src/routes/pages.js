@@ -1,7 +1,9 @@
 const express = require('express');
 const route = express.Router();
 
-const { isAuth, isAdmin, requireSignin } = require('../middlewares/auth');
+const {
+  requireSignin,
+} = require('../middlewares/auth');
 
 const { getUserByID } = require('../middlewares/user');
 
@@ -27,21 +29,21 @@ const {
 
 route.get('/', form);
 route.get('/login', loginPage);
-route.get('/admin', admin);
-route.get('/admin/add-cartographes', addCartographe);
-route.get('/admin/edit-cartographes', editCartographe);
-route.get('/admin/add-user', addUser);
-route.get('/admin/add-fonctionnaire', addFonctionnaire);
-route.get('/admin/add-fonction', addFonction);
-route.get('/admin/cartographes', listCartographe);
-route.get('/admin/add-instruction', addInstructions);
-route.get('/admin/instructions', listInstructions);
-route.get('/admin/paiements', paiements);
-route.get('/admin/paiement-salaires', paiementSalaires);
-route.get('/admin/paiement-perdiems', paiementPerdiems);
-route.get('/admin/add-autres-paiements', autres);
-route.get('/admin/autres-paiements', listAutres);
-route.get('/admin/rapports', rapports);
+route.get('/admin', requireSignin, admin);
+route.get('/admin/add-cartographes', requireSignin, addCartographe);
+route.get('/admin/edit-cartographes', requireSignin, editCartographe);
+route.get('/admin/add-user', requireSignin, addUser);
+route.get('/admin/add-fonctionnaire', requireSignin, addFonctionnaire);
+route.get('/admin/add-fonction', requireSignin, addFonction);
+route.get('/admin/cartographes', requireSignin, listCartographe);
+route.get('/admin/add-instruction', requireSignin, addInstructions);
+route.get('/admin/instructions', requireSignin, listInstructions);
+route.get('/admin/paiements', requireSignin, paiements);
+route.get('/admin/paiement-salaires', requireSignin, paiementSalaires);
+route.get('/admin/paiement-perdiems', requireSignin, paiementPerdiems);
+route.get('/admin/add-autres-paiements', requireSignin, autres);
+route.get('/admin/autres-paiements', requireSignin, listAutres);
+route.get('/admin/rapports', requireSignin, rapports);
 
 route.param('userId', getUserByID);
 

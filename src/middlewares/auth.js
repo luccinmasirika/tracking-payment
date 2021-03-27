@@ -12,6 +12,7 @@ exports.requireSignin = (req, res, next) => {
 
     const decoded = jwt.verify(token, config.secret.signedTokenString);
     req.auth = decoded;
+    console.log('user', req.auth);
     next();
   } catch (err) {
     req.flash('Error', 'Access denied');
@@ -23,6 +24,8 @@ exports.requireSignin = (req, res, next) => {
 exports.isAuth = (req, res, next) => {
   const user = req.user && req.auth && req.user._id == req.auth._id;
 
+  console.log('user auth', user);
+
   if (!user) {
     req.flash('Error', 'You need to be login');
     return res.status(403).redirect('/login');
@@ -33,6 +36,8 @@ exports.isAuth = (req, res, next) => {
 // Check if user is Admin
 exports.isAdmin = (req, res, next) => {
   const user = req.user && req.auth && req.user.role == 'Admin';
+
+  console.log('user admin', user);
 
   if (!user) {
     req.flash('Error', 'Access denied, You nedd to be admin');

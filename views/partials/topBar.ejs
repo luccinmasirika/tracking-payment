@@ -17,30 +17,14 @@
         <div class="dropdown d-inline-block">
           <button
             type="button"
-            class="btn header-item waves-effect"
-            id="page-header-user-dropdown"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+            onclick="logout()"
+            class="btn header-item noti-icon right-bar-toggle waves-effect logout"
           >
-            <img
-              class="rounded-circle header-profile-user"
-              src="/assets/images/users/avatar-6.jpg"
-              alt="Admin"
-            />
-            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15"
-              >Admin</span
-            >
-            <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+            <i
+              class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"
+            ></i>
+            <span class="align-middle">Sign out</span>
           </button>
-          <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="/"
-              ><i
-                class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"
-              ></i>
-              <span class="align-middle">Sign out</span></a
-            >
-          </div>
         </div>
 
         <div class="dropdown d-inline-block">
@@ -58,3 +42,11 @@
 
   <!-- end header-->
 </div>
+
+<script>
+  const logout = () => {
+    axios.get('/signout').then((data) => {
+      window.location.href = '/login';
+    });
+  };
+</script>
