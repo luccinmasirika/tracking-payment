@@ -41,14 +41,16 @@ exports.loginPage = (req, res) => {
 exports.admin = (req, res) => {
   read('dashboard').then((n) => {
     const path = 'dashboard';
-    console.log('n', n);
     res.render('pages/admin', {
       path,
-      forms: n.form,
+      form: n.form,
+      formF: n.formF,
       agent: n.agent,
-      pNumber: n.pNumber,
-      paNumber: n.paNumber,
-      iNumber: n.iNumber,
+      agentF: n.agentF,
+      pay: n.pay,
+      payF: n.payF,
+      inst: n.inst,
+      instF: n.instF,
     });
   });
 };

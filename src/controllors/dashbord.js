@@ -1,36 +1,59 @@
 const Form = require('../models/Form'); // Fonction Schema
-const Fonction = require('../models/Fonction'); // Fonction Schema
+const Fonctionnaire = require('../models/Fonctionnaire'); // Fonction Schema
 const Cartographe = require('../models/Cartographe'); // Fonction Schema
 const Paiement = require('../models/Paiement'); // Fonction Schema
 const PaiementAutre = require('../models/PaiementAutre'); // Fonction Schema
 const Instruction = require('../models/Instruction'); // Fonction Schema
-const moment = require('moment')
-
+const moment = require('moment');
 
 // Show all Fonctions
 exports.readAll = async (req, res) => {
-  const data0 = await Form.countDocuments({});
-  const data1 = await Fonction.countDocuments({});
-  const data2 = await Cartographe.countDocuments({});
-  const semaine1 = await Cartographe.find({
-    createdAt: {
-      $gte: new Date(),
-      $lt: new Date(2021, 3, 27),
+  const filter = [
+    {
+      $match: {
+        createdAt: {
+          $gte: moment().startOf('day').toDate(),
+          $lt: moment().endOf('day').toDate(),
+        },
+      },
     },
-  });
-  const data3 = await Paiement.find({});
-  const data4 = await PaiementAutre.find({});
-  const data5 = await Instruction.countDocuments({});
+  ];
+  const form = await Form.find({});
+  const formF = await Form.aggregate(filter);
 
-  const pMontants = data3.map((n) => n.montant);
-  const paMontants = data4.map((n) => n.montant);
-  const montants = [...pMontants, ...paMontants];
+  const agent1 = await Fonctionnaire.find({});
+  const agentF1 = await Fonctionnaire.aggregate(filter);
+
+  const agent2 = await Cartographe.find({});
+  const agentF2 = await Cartographe.aggregate(filter);
+
+  const pay1 = await Paiement.find({});
+  const payF1 = await Paiement.aggregate(filter);
+
+  const pay2 = await PaiementAutre.find({});
+  const payF2 = await PaiementAutre.aggregate(filter);
+
+  const inst = await Instruction.find({});
+  const instF = await Instruction.aggregate(filter);
+
+  const add = (a, b) => {
+    const x = a.map((n) => n.montant);
+    const y = b.map((n) => n.montant);
+    return eval([...x, ...y].join('+'));
+  };
+
+  const add2 = (a, b) => {
+    return a.length + b.length;
+  };
 
   res.json({
-    form: data0,
-    agent: data1 + data2,
-    pNumber: eval(montants.join('+')),
-    iNumber: data5,
-    test: semaine1,
+    form: form.length,
+    formF: (formF.length / form.length) * 100,
+    agent: add2(agent1, agent2),
+    agentF: (add2(agentF1, agentF2) / add2(agent1, agent2)) * 100,
+    pay: add(pay1, pay2),
+    payF: (add(payF1, payF2) / add(pay1, pay2)) * 100,
+    inst: inst.length,
+    instF: (instF.length / inst.length) * 100,
   });
 };
