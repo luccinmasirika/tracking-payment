@@ -11,11 +11,11 @@ const {
   getByID,
 } = require('../controllors/cartographe');
 
-router.post('/cartographe/create', requireSignin, create);
+router.post('/cartographe/create', create);
 router.get('/cartographe/:id', read);
 router.get('/cartographes', readAll);
-router.put('/cartographe/:id', requireSignin, update);
-router.delete('/cartographe/:id', requireSignin, remove);
+router.put('/cartographe/:id', update);
+router.delete('/cartographe/:id', remove);
 
 router.param('id', getByID);
 router.param('userId', getUserByID);

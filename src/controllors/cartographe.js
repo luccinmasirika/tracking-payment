@@ -20,6 +20,7 @@ exports.read = (req, res) => {
 // Create a new cartographe
 exports.create = async (req, res) => {
   const cartographe = new Cartographe(req.body);
+  console.log(cartographe);
   cartographe.save((error, cartographe) => {
     if (error) {
       return res.status(400).json({ error: 'Unable to create cartographe' });
@@ -34,10 +35,13 @@ exports.update = async (req, res) => {
   try {
     const update = req.body;
 
-    const data = await Cartographe.findByIdAndUpdate({ _id: cartographe._id }, update , {new: true});
+    const data = await Cartographe.findByIdAndUpdate(
+      { _id: cartographe._id },
+      update,
+      { new: true }
+    );
 
     res.json(data);
-    
   } catch (err) {
     return res
       .status(400)
