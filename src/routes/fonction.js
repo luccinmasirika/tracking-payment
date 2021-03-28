@@ -11,11 +11,11 @@ const {
   getByID,
 } = require('../controllors/fonction');
 
-router.post('/fonction/create',requireSignin, create);
+router.post('/fonction/create',create);
 router.get('/fonction/:id', read);
 router.get('/fonctions', readAll);
-router.put('/fonction/:id',requireSignin, update);
-router.delete('/fonction/:id',requireSignin, remove);
+router.put('/fonction/:id', update);
+router.delete('/fonction/:id', remove);
 
 router.param('id', getByID);
 router.param('userId', getUserByID);
