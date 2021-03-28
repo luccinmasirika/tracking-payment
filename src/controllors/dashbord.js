@@ -19,9 +19,6 @@ exports.readAll = async (req, res) => {
     },
   ];
 
-  console.log('1',  moment().startOf('isoWeek').toDate())
-  console.log('2', moment().endOf('isoWeek').toDate())
-
   const form = await Form.find({});
   const formF = await Form.aggregate(filter);
 
