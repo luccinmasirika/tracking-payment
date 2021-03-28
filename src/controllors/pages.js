@@ -39,8 +39,10 @@ exports.loginPage = (req, res) => {
  * DASHBOARD SCREEN
  */
 exports.admin = (req, res) => {
-  const path = 'dashboard';
-  res.render('pages/admin', { path });
+  read('forms').then((n) => {
+    const path = 'dashboard';
+    res.render('pages/admin', { path, forms: n.length });
+  });
 };
 
 /**
@@ -181,7 +183,7 @@ exports.listInstructions = (req, res) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      console.log('data', data)
+      console.log('data', data);
       const path = 'listInstruction';
       const api = config.server.api;
       res.render('pages/admin', { path, data, api });
