@@ -36,6 +36,9 @@ exports.readAll = async (req, res) => {
   const inst = await Instruction.find({});
   const instF = await Instruction.aggregate(filter);
 
+  const oui = await Form.find({ payment: 'Oui' });
+  const non = await Form.find({ payment: 'Non' });
+
   const add = (a, b) => {
     const x = a.map((n) => n.montant);
     const y = b.map((n) => n.montant);
@@ -55,5 +58,8 @@ exports.readAll = async (req, res) => {
     payF: (add(payF1, payF2) / add(pay1, pay2)) * 100,
     inst: inst.length,
     instF: (instF.length / inst.length) * 100,
+    oui: oui.length,
+    non: non.length,
+    ration: (oui.length / form.length) * 100,
   });
 };

@@ -51,6 +51,9 @@ exports.admin = (req, res) => {
       payF: n.payF,
       inst: n.inst,
       instF: n.instF,
+      oui: n.oui,
+      non: n.non,
+      ration: n.ration
     });
   });
 };
