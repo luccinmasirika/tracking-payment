@@ -66,7 +66,7 @@ options = {
   options
 )).render();
 var options2 = {
-    series: [{ data: [25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54] }],
+    series: [{ data: [95, 96, 91, 99, 63, 25, 44, 12, 36, 9, 54] }],
     fill: { colors: ['#f1b44c'] },
     chart: { type: 'bar', width: 70, height: 40, sparkline: { enabled: !0 } },
     plotOptions: { bar: { columnWidth: '50%' } },

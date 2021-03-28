@@ -12,12 +12,13 @@ exports.readAll = async (req, res) => {
     {
       $match: {
         createdAt: {
-          $gte: moment().startOf('day').toDate(),
-          $lt: moment().endOf('day').toDate(),
+          $gte: moment().startOf('isoweek').toDate(),
+          $lt: moment().endOf('isoweek').toDate(),
         },
       },
     },
   ];
+
   const form = await Form.find({});
   const formF = await Form.aggregate(filter);
 

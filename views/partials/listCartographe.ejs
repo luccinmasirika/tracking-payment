@@ -179,16 +179,17 @@
             let g = document.getElementById("mPesa").checked = mp ==='No' ? false : true;
 
             $("#form").submit(function (event) {
+                let airt = document.getElementById("airtelMoney").checked
+                let mpesa = document.getElementById("mPesa").checked
                 var formData = {
                     firstName: $("#firstName").val(),
                     lastName: $("#lastName").val(),
                     email: $("#email").val(),
                     airtel: $("#airtel").val(),
-                    airtelMoney: $("#airtelMoney").val(),
+                    airtelMoney: airt ? 'Yes' : 'No',
                     vodacom: $("#vodacom").val(),
-                    mPesa: $("#mPesa").val(),
+                    mPesa: mpesa ? 'Yes' : 'No',
                 };
-                console.log('form', formData)
 
                 $.ajax({
                 type: "POST",
@@ -196,8 +197,8 @@
                 data: formData,
                 dataType: "json",
                 encode: true,
-                }).done(function (data) {
-                    console.log(data)
+                }).done(function (data2) {
+                    console.log('test',data)
                     $('#update').removeClass('hidden')
                     $('#cartographe').load(document.URL +  ' #cartographe');
                 });
