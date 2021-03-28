@@ -13,7 +13,7 @@ const {
 
 router.post('/instruction/create', requireSignin, create);
 router.get('/instruction/:id', requireSignin, read);
-router.get('/instructions', requireSignin, readAll);
+router.get('/instructions', readAll);
 router.put('/instruction/:id', requireSignin, update);
 router.delete('/instruction/:id', requireSignin, remove);
 
