@@ -16,6 +16,7 @@ const flash = require('./src/middlewares/flash');
  */
 
 const formRouter = require('./src/routes/form');
+const dashRouter = require('./src/routes/dashboard');
 const pagesRouter = require('./src/routes/pages');
 const userRouter = require('./src/routes/user');
 const authRouter = require('./src/routes/auth');
@@ -87,6 +88,7 @@ app.use(flash);
  * APPLICATION ROUTES MIDLLEWARES
  */
 app.use(formRouter);
+app.use(dashRouter);
 app.use(pagesRouter);
 app.use(userRouter);
 app.use(authRouter);

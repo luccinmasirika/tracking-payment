@@ -39,9 +39,17 @@ exports.loginPage = (req, res) => {
  * DASHBOARD SCREEN
  */
 exports.admin = (req, res) => {
-  read('forms').then((n) => {
+  read('dashboard').then((n) => {
     const path = 'dashboard';
-    res.render('pages/admin', { path, forms: n.length });
+    console.log('n', n);
+    res.render('pages/admin', {
+      path,
+      forms: n.form,
+      agent: n.agent,
+      pNumber: n.pNumber,
+      paNumber: n.paNumber,
+      iNumber: n.iNumber,
+    });
   });
 };
 
