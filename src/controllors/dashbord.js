@@ -43,6 +43,7 @@ exports.readAll = async (req, res) => {
   const add = (a, b) => {
     const x = a.map((n) => n.montant);
     const y = b.map((n) => n.montant);
+    // return [...x, ...y];
     return eval([...x, ...y].join('+'));
   };
 
@@ -50,6 +51,7 @@ exports.readAll = async (req, res) => {
     return a.length + b.length;
   };
 
+  console.log((add2(agentF1, agentF2) / add2(agent1, agent2)) * 100);
   res.json({
     form: form.length,
     formF: (formF.length / form.length) * 100,

@@ -48,12 +48,12 @@ exports.admin = (req, res) => {
       agent: n.agent,
       agentF: n.agentF,
       pay: n.pay,
-      payF: n.payF,
+      payF: n.payF || 0,
       inst: n.inst,
       instF: n.instF,
       oui: n.oui,
       non: n.non,
-      ration: n.ration
+      ration: n.ration,
     });
   });
 };

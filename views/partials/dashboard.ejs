@@ -29,7 +29,7 @@
                                           <h4 class="mb-1 mt-1"><span data-plugin="counterup" id="forms"><%=form%></span></h4>
                                           <p class="text-muted mb-0">Soumissions</p>
                                       </div>
-                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=formF.toFixed(2)%>%</span> cette semaine
+                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=formF && formF.toFixed(2)%>%</span> cette semaine
                                       </p>
                                   </div>
                               </div>
@@ -45,7 +45,7 @@
                                           <h4 class="mb-1 mt-1"><span data-plugin="counterup"><%=agent%></span></h4>
                                           <p class="text-muted mb-0">Nombre d'agents</p>
                                       </div>
-                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=agent.toFixed(2)%>%</span> cette semaine
+                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=agentF && agentF.toFixed(2)%>%</span> cette semaine
                                       </p>
                                   </div>
                               </div>
@@ -78,7 +78,7 @@
                                           <h4 class="mb-1 mt-1"><span data-plugin="counterup"><%=pay%></span>$</h4>
                                           <p class="text-muted mb-0">Paiments</p>
                                       </div>
-                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=payF.toFixed(2)%>%</span> cette semaine
+                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=payF && payF.toFixed(2)%>%</span> cette semaine
                                       </p>
                                   </div>
                               </div>
@@ -125,7 +125,7 @@
                                           <div id="growth-chart"></div>
                                       </div>
                                       <div>
-                                          <h4 class="mb-1 mt-1"><span data-plugin="counterup"><%=ration%></span>%</h4>
+                                          <h4 class="mb-1 mt-1"><span data-plugin="counterup"><%=ration && ration.toFixed(2)%></span>%</h4>
                                           <p class="text-muted mb-0">Taux de paiement</p>
                                       </div>
 
