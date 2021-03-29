@@ -63,8 +63,6 @@ exports.readAll = async (req, res) => {
     instF: (instF.length / inst.length) * 100,
     oui: oui.length,
     non: non.length,
-    ration: (oui.length / form.length) * 100,
-    pay1,
-    pay2,
+    ration: (oui.length / form.length) * 100
   });
 };
