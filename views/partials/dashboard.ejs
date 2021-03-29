@@ -19,7 +19,7 @@
 
 
                       <div class="row">
-                          <div class="col-md-6 col-xl-3">
+                          <div class="col-lg-6 col-xl-3">
                               <div class="card">
                                   <div class="card-body">
                                       <div class="float-end mt-2">
@@ -35,7 +35,7 @@
                               </div>
                           </div>
 
-                          <div class="col-md-6 col-xl-3">
+                          <div class="col-lg-6 col-xl-3">
                               <div class="card">
                                   <div class="card-body">
                                       <div class="float-end mt-2">
@@ -51,7 +51,7 @@
                               </div>
                           </div>
 
-                          <div class="col-md-6 col-xl-3">
+                          <div class="col-lg-6 col-xl-3">
                               <div class="card">
                                   <div class="card-body">
                                       <div class="float-end mt-2">
@@ -61,13 +61,13 @@
                                           <h4 class="mb-1 mt-1"><span data-plugin="counterup"><%=inst%></span></h4>
                                           <p class="text-muted mb-0">Instructions</p>
                                       </div>
-                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=instF.toFixed(2)%>%</span> cette semaine
+                                      <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i class="mdi mdi-arrow-up-bold me-1"></i><%=instF && instF.toFixed(2)%>%</span> cette semaine
                                       </p>
                                   </div>
                               </div>
                           </div>
 
-                          <div class="col-md-6 col-xl-3">
+                          <div class="col-lg-6 col-xl-3">
 
                               <div class="card">
                                   <div class="card-body">
@@ -85,7 +85,7 @@
                           </div>
 
 
-                          <div class="col-md-6 col-xl-4">
+                          <div class="col-lg-6 col-xl-4">
 
                               <div class="card">
                                   <div class="card-body">
@@ -101,7 +101,7 @@
                               </div>
                           </div>
 
-                          <div class="col-md-6 col-xl-4">
+                          <div class="col-lg-6 col-xl-4">
 
                               <div class="card">
                                   <div class="card-body">
@@ -117,7 +117,7 @@
                               </div>
                           </div>
 
-                          <div class="col-md-6 col-xl-4">
+                          <div class="col-lg-6 col-xl-4">
 
                               <div class="card">
                                   <div class="card-body">
@@ -136,7 +136,15 @@
 
                       </div>
 
-                      <div><b><code>Nombre d'agent</code></b> <span>C'est l'ensemble de fonctionnaires et de cartographes</span></div>
+                      <div class="row">
+                      <div class="col-xs-12 col-lg-6"><b><code>Soumissions</code></b>  <pre>C'est le nombre de fois qu'un agent ait soumit un formulaire</pre> </div>
+                      <hr>
+                      <div class="col-xs-12 col-lg-6"><b><code>Nombre d'agent</code></b>  <pre>C'est l'ensemble de fonctionnaires et de cartographes</pre> </div>
+                      <hr>
+                      <div class="col-xs-12 col-lg-6"><b><code>Nombre d'instruction</code></b>  <pre>C'est le nombre de lettres d'instructions</pre> </div>
+                      <hr>
+                      <div class="col-xs-12 col-lg-6"><b><code>Paiement</code></b> <pre>C'est la sommes totale des paiements (autres paiements inclus)</pre> </div>
+                      </div>
 
                       <!-- <div class="row">
                           <div class="col-xl-8">
@@ -154,7 +162,7 @@
                                                   </h3>
                                               </li>
                                               <li class="list-inline-item chart-border-left me-0">
-                                                  <h3><span data-plugin="counterup"><%=ration.toFixed(2)%></span>%<span class="text-muted d-inline-block font-size-15 ms-3">Taux de paiement</span></h3>
+                                                  <h3><span data-plugin="counterup"><%= ration && ration.toFixed(2)%></span>%<span class="text-muted d-inline-block font-size-15 ms-3">Taux de paiement</span></h3>
                                               </li>
                                           </ul>
                                       </div>

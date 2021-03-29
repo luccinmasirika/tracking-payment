@@ -21,6 +21,8 @@
                       <div class="row">
                         <div class="col-lg-12">
 
+                          <div><b>Ces données viennent du formulaire en page d'accuel</b></div>
+
                             <div class="table-responsive mb-4" id="refresh">
                                 <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
@@ -162,6 +164,7 @@
                 $.post(`${API.trim()}/form/${id}?_method=DELETE`, function(data, status){
                   $('#alert').removeClass('hidden')
                     $('#refresh').load(document.URL +  ' #refresh');
+                    console.log('test', data, status)
                    });
                 });
               });
