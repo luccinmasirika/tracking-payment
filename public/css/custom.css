@@ -32,7 +32,7 @@ body {
 .my-content {
   background: rgba(0, 0, 0, 0.6);
   padding: 60px 40px;
-  width: 100vw;
+  width: 100%;
   height: 100%;
 }
 
