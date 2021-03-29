@@ -36,6 +36,13 @@ body {
   height: 100%;
 }
 
+.my-content2 {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 60px 40px;
+  width: 100vw;
+  height: 100%;
+}
+
 .text1 {
   font-family: 'Montserrat';
   color: #fff;

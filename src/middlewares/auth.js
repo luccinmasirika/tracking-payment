@@ -12,7 +12,6 @@ exports.requireSignin = (req, res, next) => {
 
     const decoded = jwt.verify(token, config.secret.signedTokenString);
     req.auth = decoded;
-    console.log('user', req.auth);
     next();
   } catch (err) {
     req.flash('Error', 'Access denied');
