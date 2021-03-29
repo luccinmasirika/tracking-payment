@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "push": "git add . && git commit -m 'deploy' && git push origin master && git push heroku master"
   },
   "keywords": [],
   "author": "",
