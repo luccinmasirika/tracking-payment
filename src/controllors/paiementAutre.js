@@ -45,8 +45,6 @@ exports.update = async (req, res) => {
 
     const data = await PaiementAutre.findOne({ _id: paiementAutre._id });
 
-    console.log('data1', data);
-
     // Pass the request body to user and save new user data in database
     Object.assign(data, {
       paiement,
@@ -59,7 +57,6 @@ exports.update = async (req, res) => {
       description,
     });
 
-    console.log('data2', data);
 
     data.save();
 

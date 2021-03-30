@@ -11,11 +11,9 @@ exports.signin = async (req, res) => {
       req.flash('Error', `${data.error}`);
       res.status(400).redirect('/login');
     }
-    console.log('data', response.data);
     res.redirect('/admin');
   } catch (err) {
     req.flash('Error', `${err}`);
-    console.log('data', err);
     return res.status(400).redirect('/login');
   }
 };
@@ -28,7 +26,7 @@ exports.signup = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-user');
       }
-      console.log('data', data);
+
       req.flash('Success', `${data.firstName} ${data.lastName} added`);
       res.redirect('/admin/add-user');
     });
@@ -46,7 +44,7 @@ exports.createCartographe = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-cartographes');
       }
-      console.log('data', data);
+
       req.flash('Success', `${data.firstName} ${data.lastName} added`);
       res.redirect('/admin/cartographes');
     });
@@ -64,12 +62,10 @@ exports.updateCartographe = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-cartographes');
       }
-      console.log('data1', data);
       req.flash('Success', `${data.firstName} ${data.lastName} Updated`);
       res.redirect('/admin/cartographes');
     });
   } catch (err) {
-    console.log(err);
     res.redirect('/admin/add-cartographes');
   }
 };
@@ -82,7 +78,7 @@ exports.createFonction = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-fonction');
       }
-      console.log('data', data);
+
       req.flash('Success', `${data.name} added`);
       res.redirect('/admin/add-fonction');
     });
@@ -100,7 +96,7 @@ exports.createFonctionnaire = async (req, res) => {
         req.flash('Error', `${data.error}`);
         res.redirect('/admin/add-fonctionnaire');
       }
-      console.log('data', data);
+
       req.flash('Success', `${data.firstName} ${data.lastName} added`);
       res.redirect('/admin/add-fonctionnaire');
     });
@@ -210,7 +206,6 @@ exports.createForm = async (req, res) => {
         req.flash('Success', `Form submeted`);
         res.redirect('/');
       }
-      console.log('data', data);
     });
   } catch (err) {
     req.flash('Error', `${err}`);

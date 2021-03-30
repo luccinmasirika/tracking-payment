@@ -50,7 +50,7 @@
                                         </div>
 
                             <div class="table-responsive mb-4" id="refresh">
-                                <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
+                                <table id="print" class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -61,7 +61,7 @@
                                             <th>Date</th>
                                             <th>Libellé</th>
                                             <th>Province</th>
-                                            <th style="width: 120px;">Action</th>
+                                            <th style="width: 120px;" data-html2canvas-ignore="true">Action</th>
                                             <th>Description</th>
                                         </tr>
                                     </thead>
@@ -82,7 +82,7 @@
                                           <td><%=el.date%></td>
                                           <td><%=el.libelle%></td>
                                           <td><%=el.province%></td>
-                                          <td>
+                                          <td data-html2canvas-ignore="true">
                                             <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%>" style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                             <button type="button" data-bs-toggle="modal" data-id="<%=el._id%>"  data-api="<%=api%>" data-bs-target=".preview" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light update">Preview <i class="fas fa-eye"></i></button>
                                           </td>
@@ -92,6 +92,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button class="btn btn-primary" onclick="doPdf('print', 'Autres_paiements.pdf')">Imprimer</button>
                         </div>
                     </div>
 
@@ -145,7 +146,7 @@
 
       <script src="/assets/js/app.js"></script>
 
-
+      <%- include('./print.ejs') %>
 
       <script>
        $(document).ready(function () {
@@ -168,7 +169,6 @@
                document.getElementById("province").innerText =  data.province;
                document.getElementById("description").innerText =  data.description;
 
-               console.log('data', data)
 
                //UPDATE ELEMENTS
                $("#form").submit(function (event) {

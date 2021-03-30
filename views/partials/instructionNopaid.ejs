@@ -5,7 +5,6 @@
   role="dialog"
   aria-labelledby="myExtraLargeModalLabel"
   aria-hidden="true"
-  id="refresh"
 >
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
@@ -20,7 +19,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="details">
         <div class="row">
           <div class="col-lg-12">
             <div class="card" style="padding: 40px">
@@ -112,7 +111,7 @@
         </button>
         <button
           class="btn btn-success waves-effect waves-light me-1"
-          onclick="window.print()"
+          onclick="doPdf()"
         >
           <i class="fa fa-print"></i>
         </button>
@@ -132,3 +131,19 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<script>
+  const doPdf = () => {
+    const element = document.getElementById('details');
+    const opt = {
+      margin: 0,
+      filename: 'Instruction_details.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+    };
+
+    html2pdf().from(element).set(opt).save();
+  };
+</script>
+

@@ -196,7 +196,7 @@ exports.listInstructions = (req, res) => {
       if (data.error) {
         req.flash('Error', `${data.error}`);
       }
-      console.log('data', data);
+
       const path = 'listInstruction';
       const api = config.server.api;
       res.render('pages/admin', { path, data, api });

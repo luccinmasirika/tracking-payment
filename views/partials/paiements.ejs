@@ -102,14 +102,14 @@
                               <p class="card-title-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, qui.</p>
 
                               <div class="table-responsive" id="refresh">
-                                  <table class="table table-striped mb-0">
+                                  <table id="print" class="table table-striped mb-0">
                                       <thead>
                                           <tr>
                                               <th>#</th>
                                               <th>Type de paiement</th>
                                               <th>Description</th>
                                               <th>Montant</th>
-                                              <th>Action</th>
+                                              <th data-html2canvas-ignore="true">Action</th>
                                           </tr>
                                       </thead>
                                       <tbody>
@@ -119,7 +119,7 @@
                                               <td><%=el.payment%></td>
                                               <td><%=el.description%></td>
                                               <td><%=el.montant%>$</td>
-                                              <td class="action">
+                                              <td class="action" data-html2canvas-ignore="true">
                                                 <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".edit" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
                                                 <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                           </td>
@@ -128,7 +128,7 @@
                                   </tbody>
                                 </table>
                               </div>
-
+                              <button class="btn btn-primary" onclick="doPdf('print', 'Paiement.pdf')">Imprimer</button>
                           </div>
                       </div>
                       </div>
@@ -161,6 +161,8 @@
       <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
 
        <script src="/assets/js/app.js"></script>
+
+      <%- include('./print.ejs') %>
 
        <script>
         // CREATE ELEMENT

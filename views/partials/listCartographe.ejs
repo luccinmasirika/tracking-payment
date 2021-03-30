@@ -76,7 +76,7 @@
                                             <th>Airtel</th>
                                             <th>Vodacom</th>
                                             <th>Email</th>
-                                            <th class="action">Action</th>
+                                            <th class="action" data-html2canvas-ignore="true">Action</th>
                                         </tr>
                                         </thead>
 
@@ -103,7 +103,7 @@
                                                     <% } %>
                                                 </td>
                                                 <td><%=el.email%></td>
-                                                <td class="action">
+                                                <td class="action" data-html2canvas-ignore="true">
                                                     <button type="button" class="px-3 text-primary update" data-bs-toggle="modal" data-bs-target=".editCartographe" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-pen font-size-18"></i></button>
                                                     <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                                 </td>
@@ -113,6 +113,7 @@
                                     </table>
                                 </div>
                             </div>
+                            <button class="btn btn-primary" onclick="doPdf('cartographe', 'Cartographes.pdf')">Imprimer</button>
                         </div> <!-- end col -->
                     </div> <!-- end row -->
                       <!-- End Data Table-->
@@ -159,6 +160,8 @@
       <script src="/assets/js/pages/datatables.init.js"></script>
 
       <script src="/assets/js/app.js"></script>
+
+      <%- include('./print.ejs') %>
 
 
     <script>

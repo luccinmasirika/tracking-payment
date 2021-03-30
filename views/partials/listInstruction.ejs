@@ -52,7 +52,7 @@
                                         </div>
 
                             <div class="table-responsive mb-4" id="refresh">
-                                <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
+                                <table class="table table-centered datatable dt-responsive nowrap table-card-list" id="print" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
                                             <th>#</th>
                                             <th>Date</th>
@@ -61,7 +61,7 @@
                                             <th>Agent</th>
                                             <th>Libellé</th>
                                             <th>Description</th>
-                                            <th style="width: 120px;">Action</th>
+                                            <th style="width: 120px;" data-html2canvas-ignore="true">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,7 +83,7 @@
                                           <td><%=el.libelle%></td>
                                           <td><%=(el.agent).substring(0,30)%>...</td>
 
-                                          <td>
+                                          <td data-html2canvas-ignore="true">
                                             <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%>" style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                             <button type="button" data-bs-toggle="modal" data-bs-target=".instructionNoPaid" data-api="<%=api%>"  data-id="<%=el._id%>" class="btn btn-primary update btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
@@ -92,6 +92,9 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <button class="btn btn-primary" onclick="doPdf('print', 'Instruction.pdf')">Imprimer</button>
+
                         </div>
                     </div>
 
@@ -186,7 +189,6 @@
                   $('#No').addClass('hidden')
                 })
 
-                console.log('test', data)
 
                 //UPDATE ELEMENTS
                 $("#form").submit(function (event) {

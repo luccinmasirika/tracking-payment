@@ -24,7 +24,7 @@
                           <div><b>Ces données viennent du formulaire en page d'accuel</b></div>
 
                             <div class="table-responsive mb-4" id="refresh">
-                                <table class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
+                                <table id="print" class="table table-centered datatable dt-responsive nowrap table-card-list" style="border-collapse: collapse; border-spacing: 0 12px; width: 100%;">
                                     <thead>
                                             <th>#</th>
                                             <th>Name</th>
@@ -34,7 +34,7 @@
                                             <th>Etat</th>
                                             <th>Date</th>
                                             <th>Commentaire</th>
-                                            <th style="width: 120px;">Action</th>
+                                            <th style="width: 120px;" data-html2canvas-ignore="true">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody
@@ -64,7 +64,7 @@
                                                -
                                              <% } %>
                                           </td>
-                                          <td>
+                                          <td data-html2canvas-ignore="true">
                                               <button type="button" class="px-3 text-danger remove" data-id="<%=el._id%>" data-api="<%=api%> " style="background: transparent; border: none;"><i class="uil uil-trash-alt font-size-18"></i></button>
                                               <button type="button" data-bs-toggle="modal" data-bs-target=".salaireModal" data-id="<%=el._id%>" data-api="<%=api%> "  class="btn btn-primary update btn-sm btn-rounded waves-effect waves-light">Preview <i class="fas fa-eye"></i></button>
                                           </td>
@@ -74,8 +74,10 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button class="btn btn-primary" onclick="doPdf('print', 'Rapport_de_paie.pdf')">Imprimer</button>
                         </div>
                     </div>
+
 
 
                       <!-- End Instruction list-->
@@ -123,6 +125,8 @@
 
       <script src="/assets/js/app.js"></script>
 
+      <%- include('./print.ejs') %>
+
 
       <script>
         $(document).ready(function () {
@@ -142,7 +146,6 @@
                 document.getElementById("montant").innerText =  data.montant || '--';
                 document.getElementById("comment").innerText =  data.comment || '--';
 
-                console.log('Data', data)
 
                 if(data.payment==="Oui") {
                   $('#Oui').removeClass('hidden')
